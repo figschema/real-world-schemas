@@ -8,10 +8,10 @@ The database behind the CMS that runs ~43% of the web: 12 tables, zero foreign k
 
 | | |
 |---|---|
-| Tables | TODO — verified against the dump |
+| Tables | 12 · 0 foreign keys · 41 key/index declarations — counted from the captured DDL |
 | Engine | MySQL / MariaDB |
-| Source | [`wp-admin/includes/schema.php`](https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/schema.php) |
-| Captured from | TODO — WordPress X.Y, on DATE |
+| Source | [`wp-admin/includes/schema.php`](https://github.com/WordPress/WordPress/blob/7.1.3/wp-admin/includes/schema.php) @ tag `7.1.3` |
+| Captured from | WordPress 7.1.3, on 2026-10-23 |
 | License | GPL-2.0-or-later |
 
 ## What's interesting
