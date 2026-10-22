@@ -1,0 +1,9 @@
+# Working files - never published. Only renders, annotations, provenance
+# and DBML get committed; raw dumps stay local (license hygiene + weight).
+apps/*/work/
+*.dump.sql
+downloads/
+
+# OS junk
+Thumbs.db
+.DS_Store
