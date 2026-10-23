@@ -1,5 +1,9 @@
 # Real-World Database Schemas
 
+![GitHub License](https://img.shields.io/github/license/figschema/real-world-schemas?style=for-the-badge&label=License)
+![GitHub Release](https://img.shields.io/github/v/release/figschema/real-world-schemas?display_name=release&style=for-the-badge)
+
+
 Beautiful, annotated ER diagrams of **real open-source applications' databases** - not templates, not approximations. Every schema is captured from the project's own migrations and rendered with [FigSchema](https://figschema.com), the schema designer that lives in FigJam.
 
 ![WordPress database schema - Real-World Schemas #1](apps/wordpress/thumbnail.svg)
