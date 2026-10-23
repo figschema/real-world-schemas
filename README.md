@@ -2,7 +2,7 @@
 
 Beautiful, annotated ER diagrams of **real open-source applications' databases** - not templates, not approximations. Every schema is captured from the project's own migrations and rendered with [FigSchema](https://figschema.com), the schema designer that lives in FigJam.
 
-<!-- TODO: hero strip once the first diagrams are rendered -->
+![WordPress database schema - Real-World Schemas #1](apps/wordpress/thumbnail.svg)
 
 ## Why this repo exists
 
@@ -12,7 +12,7 @@ The best database-design education is reading how real systems model real proble
 
 | App | What it is | Tables | Stack | License | Diagram |
 |---|---|---|---|---|---|
-| [WordPress](apps/wordpress/) | The CMS running ~43% of the web | 12 core | PHP · MySQL | GPL-2.0+ | 🚧 in progress |
+| [WordPress](apps/wordpress/) | The CMS running ~43% of the web | 12 | PHP · MySQL | GPL-2.0+ | ✅ done |
 
 One new schema every week.
 

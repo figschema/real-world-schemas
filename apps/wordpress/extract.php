@@ -30,7 +30,7 @@ class WpdbShim {
 
 	/**
 	 * What a real wpdb returns on a default utf8mb4 install. The collate
-	 * component is MySQL-version-dependent, so we emit the charset only —
+	 * component is MySQL-version-dependent, so we emit the charset only -
 	 * it changes index widths, not the schema structure this gallery draws.
 	 */
 	public function get_charset_collate() {
