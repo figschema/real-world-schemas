@@ -1,6 +1,6 @@
 # DocuSeal database schema
 
-> 🚧 **In progress** - captured, being arranged. This banner disappears when the diagram lands.
+![DocuSeal database schema - ER diagram](schema.svg)
 
 The database behind the open-source document-signing platform: 44 tables, 43 explicit foreign keys, and a schema where document reproducibility is a first-class design decision.
 
