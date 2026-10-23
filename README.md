@@ -13,6 +13,7 @@ The best database-design education is reading how real systems model real proble
 | App | What it is | Tables | Stack | License | Diagram |
 |---|---|---|---|---|---|
 | [WordPress](apps/wordpress/) | The CMS running ~43% of the web | 12 | PHP · MySQL | GPL-2.0+ | ✅ done |
+| [Ghost](apps/ghost/) | The publishing platform (Ghost 6) | 97 | Node · MySQL/SQLite | MIT | 🚧 in progress |
 
 One new schema every week.
 

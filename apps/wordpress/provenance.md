@@ -34,4 +34,4 @@ Alternative reproduction path: install WordPress normally (any host or local sta
 - [x] table/FK counts verified against the DDL (12 · 0 · 41)
 - [x] SVG + thumbnail exported
 - [x] DBML exported from FigSchema
-- [ ] FigJam Community file published, link added to the entry
+- [x] FigJam Community file published, link added to the entry
