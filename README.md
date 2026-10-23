@@ -14,6 +14,7 @@ The best database-design education is reading how real systems model real proble
 |---|---|---|---|---|---|
 | [WordPress](apps/wordpress/) | The CMS running ~43% of the web | 12 | PHP · MySQL | GPL-2.0+ | ✅ done |
 | [Ghost](apps/ghost/) | The publishing platform (Ghost 6) | 97 | Node · MySQL/SQLite | MIT | 🚧 in progress |
+| [DocuSeal](apps/docuseal/) | Document signing & workflows | 44 | Ruby · PostgreSQL | AGPL-3.0+ | 🚧 in progress |
 
 One new schema every week.
 
@@ -38,4 +39,4 @@ Every diagram here was built with [FigSchema](https://figschema.com) - paste a s
 
 ## Corrections & suggestions
 
-Something wrong in a diagram? Open an issue or a PR - hand-arranged diagrams improve the same way software does. Suggestions for which app to visualize next are welcome; preference goes to actively maintained open-source projects.
+Something wrong in a diagram? Open an issue or a PR - hand-arranged diagrams improve the same way software does. See [CONTRIBUTING.md](CONTRIBUTING.md) for what is hand-made vs generated and how corrections work. Suggestions for which app to visualize next are welcome; preference goes to actively maintained open-source projects.
