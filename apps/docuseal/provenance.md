@@ -29,7 +29,7 @@ Alternative reproduction path: start DocuSeal against PostgreSQL and `pg_dump --
 - [x] captured from DocuSeal 3.3.3 on 2026-10-23
 - [x] `schema.rb` + DDL stored locally in `work/`, confirmed gitignored
 - [x] table/FK/column counts verified against the DDL (44 · 43 · 371)
-- [ ] SVG + thumbnail exported
-- [ ] DBML exported from FigSchema
-- [ ] dictionary.md exported from FigSchema
+- [x] SVG + thumbnail exported
+- [x] DBML exported from FigSchema
+- [x] dictionary.md exported from FigSchema
 - [ ] FigJam Community file published, link added to the entry

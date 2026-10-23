@@ -103,6 +103,21 @@ const ON_DELETE = {
   restrict: 'RESTRICT',
 };
 
+/**
+ * Identifiers that FigSchema's SQL import classifies as table-constraint
+ * keywords before reading them as columns (KEY, INDEX, CHECK, ...). Quoting
+ * them makes the import read them as columns; PostgreSQL accepts the quotes
+ * regardless.
+ */
+const CONSTRAINT_KEYWORDS = new Set([
+  'constraint', 'primary', 'foreign', 'unique', 'check',
+  'key', 'index', 'fulltext', 'spatial', 'exclude', 'like',
+]);
+
+function quoteIfNeeded(name) {
+  return CONSTRAINT_KEYWORDS.has(name.toLowerCase()) ? `"${name}"` : name;
+}
+
 let current = null;
 for (const line of source.split('\n')) {
   let m;
@@ -139,7 +154,7 @@ for (const line of source.split('\n')) {
     const opts = parseOptions(optsRaw ?? '');
     const pgType = PG_TYPES[type] ?? (warnings.push(`${current.name}.${name}: unknown type ${type}`), type);
     const notNull = opts['null'] === 'false' ? ' NOT NULL' : '';
-    current.columns.push(`  ${name} ${pgType}${notNull}${sqlDefault(opts['default'])}`);
+    current.columns.push(`  ${quoteIfNeeded(name)} ${pgType}${notNull}${sqlDefault(opts['default'])}`);
     continue;
   }
   if (current && /^  end$/.test(line)) {
@@ -151,7 +166,6 @@ for (const line of source.split('\n')) {
   }
 }
 
-const ON_DELETE_RULES = [];
 let fkCount = 0;
 for (const { from, to, opts } of foreignKeySpecs) {
   const table = tables.get(from);
