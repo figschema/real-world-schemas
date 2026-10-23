@@ -1,0 +1,34 @@
+name: Diagram correction
+description: Report an error in a diagram, annotation, dictionary or DBML
+labels: [correction]
+body:
+  - type: dropdown
+    id: entry
+    attributes:
+      label: Which entry?
+      options:
+        - WordPress
+        - Ghost
+        - DocuSeal
+        - Other / future entry
+    validations:
+      required: true
+  - type: textarea
+    id: what-is-wrong
+    attributes:
+      label: What is wrong?
+      description: The table, column, relationship, index or annotation text that is incorrect.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: The upstream migration line, DDL statement or documentation that proves it. Link or paste it - evidence is what makes a correction actionable.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction attempt (optional)
+      description: If you regenerated the capture yourself using the entry's provenance.md, describe what you got.
