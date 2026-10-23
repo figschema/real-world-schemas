@@ -36,6 +36,21 @@ const KNEX_MYSQL_TYPES = {
   dateTime: 'datetime',
 };
 
+/**
+ * Identifiers that FigSchema's SQL import classifies as table-constraint
+ * keywords before reading them as columns (KEY, INDEX, CHECK, ...). Quoting
+ * them makes the import read them as columns; MySQL accepts the quotes
+ * regardless (Ghost's schema has a `key` column).
+ */
+const CONSTRAINT_KEYWORDS = new Set([
+  'constraint', 'primary', 'foreign', 'unique', 'check',
+  'key', 'index', 'fulltext', 'spatial', 'exclude', 'like',
+]);
+
+function quoteIfNeeded(name) {
+  return CONSTRAINT_KEYWORDS.has(name.toLowerCase()) ? `\`${name}\`` : name;
+}
+
 function mysqlType(spec) {
   if (spec.type === 'text') {
     // knex's MySQL compiler concatenates the fieldtype: 'long' -> 'longtext'
@@ -104,7 +119,7 @@ for (const [table, spec] of Object.entries(schema)) {
     columnCount++;
 
     const notNull = c.nullable === true ? '' : ' NOT NULL';
-    columns.push(`  ${column} ${mysqlType(c)}${c.unsigned ? ' unsigned' : ''}${notNull}${sqlDefault(c)}`);
+    columns.push(`  ${quoteIfNeeded(column)} ${mysqlType(c)}${c.unsigned ? ' unsigned' : ''}${notNull}${sqlDefault(c)}`);
 
     if (c.primary === true) primaryKey.push(column);
     if (c.unique === true) uniques.push(`  UNIQUE KEY \`${table}_${column}_unique\` (${column})`);
