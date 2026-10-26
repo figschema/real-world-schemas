@@ -33,4 +33,3 @@ Alternative reproduction path: start DocuSeal against PostgreSQL and `pg_dump --
 - [x] DBML exported from FigSchema
 - [x] dictionary.md exported from FigSchema
 - [x] FigJam Community file published, link added to the entry
-- [x] upstream pitch posted to the DocuSeal project (docusealco/docuseal Discussions, 2026-10-23)
