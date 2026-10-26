@@ -4,6 +4,8 @@
 
 The database behind the CMS that runs ~43% of the web: 12 tables, zero foreign keys, and the most influential key-value design in open source.
 
+**Read the full walkthrough:** [The WordPress database schema, visualized - figschema.com](https://figschema.com/blog/wordpress-database-schema)
+
 ## At a glance
 
 | | |
@@ -20,7 +22,7 @@ The database behind the CMS that runs ~43% of the web: 12 tables, zero foreign k
 - **The taxonomy trio.** `terms` → `term_taxonomy` → `term_relationships` is a three-table dance that lets one term be a category here and a tag there. Famously confusing, historically deliberate.
 - **Zero foreign keys.** Referential integrity is enforced in PHP, not the engine - a MyISAM-era decision that survived the move to InnoDB. Related rows are deleted by code, which is why orphaned meta is a chronic WordPress support topic.
 - **`posts.GUID` never changes.** A permanent, globally unique identifier for syndication, immune to URL and site moves - a quiet lesson in designing for content that outlives its address.
-- **Multisite is one extra network layer.** `site`, `sitemeta`, `blogs`, `blogmeta`, `signups`, `registration_log`, and `blog_versions` turn a single install into thousands of independent sites sharing one users table.
+- **Multisite is one extra network layer.** `site`, `sitemeta`, `blogs`, `blogmeta`, `signups`, and `registration_log` turn a single install into thousands of independent sites sharing one users table.
 
 ## Files
 
