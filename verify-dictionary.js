@@ -30,12 +30,16 @@ const ddlTables = new Map();
 current = null;
 for (const line of ddl.split('\n')) {
   const t = line.match(/^CREATE TABLE (\S+) \(/);
-  if (t) { current = t[1]; ddlTables.set(current, new Set()); continue; }
+  if (t) { current = t[1].replace(/[`"]/g, ''); ddlTables.set(current, new Set()); continue; }
   if (current) {
-    if (/^\);/.test(line)) { current = null; continue; }
-    const c = line.match(/^  (\S+) /);
-    if (c && !['PRIMARY', 'FOREIGN', 'UNIQUE', 'KEY'].includes(c[1])) {
-      ddlTables.get(current).add(c[1].replace(/"/g, ''));
+    if (/^\s*\)/.test(line)) { current = null; continue; }
+    const c = line.match(/^\s+(\S+) /);
+    const up = c && c[1].toUpperCase();
+    // constraint keywords only when the token IS one or is immediately
+    // followed by '(' - a bare prefix would eat real columns (CHECKSUM)
+    const isConstraint = up && ['PRIMARY', 'FOREIGN', 'UNIQUE', 'KEY', 'CONSTRAINT', 'INDEX', 'FULLTEXT', 'SPATIAL', 'CHECK'].some((k) => up === k || up.startsWith(k + '('));
+    if (c && !c[1].startsWith(')') && !isConstraint) {
+      ddlTables.get(current).add(c[1].replace(/[`"]/g, ''));
     }
   }
 }
