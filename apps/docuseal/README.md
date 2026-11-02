@@ -4,6 +4,8 @@
 
 The database behind the open-source document-signing platform: 44 tables, 43 explicit foreign keys, and a schema where document reproducibility is a first-class design decision.
 
+**Read the full walkthrough:** [The DocuSeal database schema, visualized - figschema.com](https://figschema.com/blog/docuseal-database-schema)
+
 ## At a glance
 
 | | |
@@ -20,7 +22,7 @@ The database behind the open-source document-signing platform: 44 tables, 43 exp
 - **Versioned documents are the core design.** `template_versions`, `submitter_versions`, `dynamic_document_versions` - a signed PDF must be reproducible years later, so every document artefact is an immutable versioned row rather than an editable one.
 - **The security audit trail ships with the schema.** The four `console1984_*` tables - users, sessions, commands, sensitive accesses - come from Rails' console-auditing gem: every production console session is recorded, and the schema shows it.
 - **Search is a tsvector column, not a service.** `tsvector` columns plus the `btree_gin` extension carry the document search; the `search_entries` table (seven indexes on its own) keeps it current.
-- **Product and framework in one picture.** Alongside the DocuSeal tables sit the Rails scaffolding tables - `active_storage_*`, `oauth_access_*`, `sessions` - so the diagram shows both the product and the framework it stands on, each recognisable at a glance.
+- **Product and framework in one picture.** Alongside the DocuSeal tables sit the Rails scaffolding tables - `active_storage_*`, `oauth_access_*` - so the diagram shows both the product and the framework it stands on, each recognisable at a glance.
 
 ## Files
 

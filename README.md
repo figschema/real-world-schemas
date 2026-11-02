@@ -20,7 +20,7 @@ The best database-design education is reading how real systems model real proble
 | [DocuSeal](apps/docuseal/) | Document signing & workflows | 44 | Ruby · PostgreSQL | AGPL-3.0+ | ✅ done |
 | [Mastodon](apps/mastodon/) | Decentralized social network | 116 | Ruby · PostgreSQL | AGPL-3.0+ | 🚧 in progress |
 | [MediaWiki](apps/mediawiki/) | The wiki engine behind Wikipedia | 64 | PHP · MySQL | GPL-2.0+ | 🚧 in progress |
-| [Matomo](apps/matomo/) | Open-source web analytics | 26 | PHP · MySQL | GPL-3.0 | 🚧 in progress |
+| [Matomo](apps/matomo/) | Open-source web analytics | 26 | PHP · MySQL | GPL-3.0 | ✅ done |
 
 One new schema every week.
 

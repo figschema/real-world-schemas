@@ -33,8 +33,9 @@ The database behind the leading open-source web-analytics platform: 26 tables, z
 
 ## Interactive version
 
-⏳ Public FigJam file - link lands after the Community publish.
+Explore this schema interactively in FigJam - pan, zoom, and duplicate it:
 
+**[Matomo Database Schema - ER Diagram · Real-World Schemas #3](https://www.figma.com/community/file/1698372092173172163/matomo-database-schema-er-diagram-real-world-schemas-3)
 ---
 
 *Diagram rendered with [FigSchema](https://figschema.com). Matomo is copyright the Matomo team - this gallery is unaffiliated; the diagram and annotations are CC BY 4.0.*
