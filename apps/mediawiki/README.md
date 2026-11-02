@@ -33,7 +33,9 @@ The database behind Wikipedia and every other wiki farm running MediaWiki: 64 ta
 
 ## Interactive version
 
-⏳ Public FigJam file - link lands after the Community publish.
+Explore this schema interactively in FigJam - pan, zoom, and duplicate it:
+
+**[MediaWiki Database Schema - ER Diagram · Real-World Schemas #4](https://www.figma.com/community/file/1699090003890981312)
 
 ---
 
