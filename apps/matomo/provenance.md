@@ -33,4 +33,4 @@ Alternative reproduction path: install Matomo against MySQL and `mysqldump --no-
 - [x] DBML exported from FigSchema
 - [x] dictionary.md exported from FigSchema
 - [x] DBML + dictionary verified against the DDL (issues: 0 on both)
-- [ ] FigJam Community file published, link added to the entry
+- [x] FigJam Community file published, link added to the entry

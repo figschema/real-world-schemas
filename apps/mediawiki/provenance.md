@@ -29,7 +29,7 @@ Alternative reproduction path: install MediaWiki against MySQL and `mysqldump --
 - [x] captured from MediaWiki 1.46.2 on 2026-10-31
 - [x] `tables.json` + DDL stored locally in `work/`, confirmed gitignored
 - [x] table/column/index counts verified against the DDL (64 · 387 · 132)
-- [ ] SVG + thumbnail exported
-- [ ] DBML exported from FigSchema
-- [ ] dictionary.md exported from FigSchema
-- [ ] FigJam Community file published, link added to the entry
+- [x] SVG + thumbnail exported
+- [x] DBML exported from FigSchema
+- [x] dictionary.md exported from FigSchema
+- [x] FigJam Community file published, link added to the entry
