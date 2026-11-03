@@ -1,6 +1,6 @@
 # Ghost database schema
 
-> 🚧 **In progress** - captured, being arranged. This banner disappears when the diagram lands.
+![Ghost database schema - ER diagram](schema.svg)
 
 The database behind the publishing platform: 97 tables, 109 foreign keys with explicit delete rules, and the disciplined opposite pole of the WordPress entry - integrity lives in the engine, not the application.
 
@@ -35,7 +35,8 @@ The database behind the publishing platform: 97 tables, 109 foreign keys with ex
 
 Explore this schema interactively in FigJam - pan, zoom, and duplicate it:
 
-**[Ghost Database Schema - ER Diagram · Real-World Schemas #5](https://www.figma.com/community/file/1699385505442534974)
+**[Ghost Database Schema - ER Diagram · Real-World Schemas #5](https://www.figma.com/community/file/1699385505442534974)**
+
 ---
 
 *Diagram rendered with [FigSchema](https://figschema.com). Ghost is a trademark of Ghost Foundation; this gallery is unaffiliated. The schema belongs to the Ghost contributors - the diagram and annotations are CC BY 4.0.*
