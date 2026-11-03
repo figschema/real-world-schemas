@@ -33,8 +33,9 @@ The database behind the publishing platform: 97 tables, 109 foreign keys with ex
 
 ## Interactive version
 
-⏳ Public FigJam file - link lands after the Community publish.
+Explore this schema interactively in FigJam - pan, zoom, and duplicate it:
 
+**[Ghost Database Schema - ER Diagram · Real-World Schemas #5](https://www.figma.com/community/file/1699385505442534974)
 ---
 
 *Diagram rendered with [FigSchema](https://figschema.com). Ghost is a trademark of Ghost Foundation; this gallery is unaffiliated. The schema belongs to the Ghost contributors - the diagram and annotations are CC BY 4.0.*

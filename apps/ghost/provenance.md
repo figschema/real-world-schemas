@@ -33,7 +33,7 @@ Alternative reproduction path: install Ghost against MySQL 8 and `mysqldump --no
 - [x] captured from Ghost 6.72.0 on 2026-10-23
 - [x] Ghost files + DDL stored locally in `work/`, confirmed gitignored
 - [x] table/FK/column counts verified against the DDL (97 · 920 · 109)
-- [ ] SVG + thumbnail exported
-- [ ] DBML exported from FigSchema
-- [ ] dictionary.md exported from FigSchema
-- [ ] FigJam Community file published, link added to the entry
+- [x] SVG + thumbnail exported
+- [x] DBML exported from FigSchema
+- [x] dictionary.md exported from FigSchema
+- [x] FigJam Community file published, link added to the entry
