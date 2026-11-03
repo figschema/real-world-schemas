@@ -16,11 +16,12 @@ The best database-design education is reading how real systems model real proble
 | App | What it is | Tables | Stack | License | Diagram |
 |---|---|---|---|---|---|
 | [WordPress](apps/wordpress/) | The CMS running ~43% of the web | 12 | PHP · MySQL | GPL-2.0+ | ✅ done |
-| [Ghost](apps/ghost/) | The publishing platform (Ghost 6) | 97 | Node · MySQL/SQLite | MIT | 🚧 in progress |
+| [Ghost](apps/ghost/) | The publishing platform (Ghost 6) | 97 | Node · MySQL/SQLite | MIT | ✅ done |
 | [DocuSeal](apps/docuseal/) | Document signing & workflows | 44 | Ruby · PostgreSQL | AGPL-3.0+ | ✅ done |
 | [Mastodon](apps/mastodon/) | Decentralized social network | 116 | Ruby · PostgreSQL | AGPL-3.0+ | 🚧 in progress |
 | [MediaWiki](apps/mediawiki/) | The wiki engine behind Wikipedia | 64 | PHP · MySQL | GPL-2.0+ | ✅ done |
 | [Matomo](apps/matomo/) | Open-source web analytics | 26 | PHP · MySQL | GPL-3.0 | ✅ done |
+| [Penpot](apps/penpot/) | Open-source design & prototyping | 59 | Clojure · PostgreSQL | MPL-2.0 | 🚧 in progress |
 
 One new schema every week.
 
