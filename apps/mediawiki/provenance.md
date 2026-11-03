@@ -1,4 +1,4 @@
-# Provenance — MediaWiki
+# Provenance - MediaWiki
 
 Every claim in the entry reduces to this file: the exact commands that produced the capture. Run them, diff us.
 
