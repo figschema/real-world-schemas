@@ -1,0 +1,133 @@
+%% Diagrammed with FigSchema
+erDiagram
+    wp_commentmeta {
+        bigint(20) meta_id PK
+        bigint(20) comment_id FK
+        varchar(255) meta_key
+        longtext meta_value
+    }
+    wp_comments {
+        bigint(20) comment_ID PK
+        bigint(20) comment_post_ID FK
+        tinytext comment_author
+        varchar(100) comment_author_email
+        varchar(200) comment_author_url
+        varchar(100) comment_author_IP
+        datetime comment_date
+        datetime comment_date_gmt
+        text comment_content
+        int(11) comment_karma
+        varchar(20) comment_approved
+        varchar(255) comment_agent
+        varchar(20) comment_type
+        bigint(20) comment_parent
+        bigint(20) user_id FK
+    }
+    wp_links {
+        bigint(20) link_id PK
+        varchar(255) link_url
+        varchar(255) link_name
+        varchar(255) link_image
+        varchar(25) link_target
+        varchar(255) link_description
+        varchar(20) link_visible
+        bigint(20) link_owner FK
+        int(11) link_rating
+        datetime link_updated
+        varchar(255) link_rel
+        mediumtext link_notes
+        varchar(255) link_rss
+    }
+    wp_options {
+        bigint(20) option_id PK
+        varchar(191) option_name UK
+        longtext option_value
+        varchar(20) autoload
+    }
+    wp_postmeta {
+        bigint(20) meta_id PK
+        bigint(20) post_id FK
+        varchar(255) meta_key
+        longtext meta_value
+    }
+    wp_posts {
+        bigint(20) ID PK
+        bigint(20) post_author FK
+        datetime post_date
+        datetime post_date_gmt
+        longtext post_content
+        text post_title
+        text post_excerpt
+        varchar(20) post_status
+        varchar(20) comment_status
+        varchar(20) ping_status
+        varchar(255) post_password
+        varchar(200) post_name
+        text to_ping
+        text pinged
+        datetime post_modified
+        datetime post_modified_gmt
+        longtext post_content_filtered
+        bigint(20) post_parent FK
+        varchar(255) guid
+        int(11) menu_order
+        varchar(20) post_type
+        varchar(100) post_mime_type
+        bigint(20) comment_count
+    }
+    wp_term_relationships {
+        bigint(20) object_id PK
+        bigint(20) term_taxonomy_id FK
+        int(11) term_order
+    }
+    wp_term_taxonomy {
+        bigint(20) term_taxonomy_id PK
+        bigint(20) term_id UK
+        varchar(32) taxonomy UK
+        longtext description
+        bigint(20) parent
+        bigint(20) count
+    }
+    wp_termmeta {
+        bigint(20) meta_id PK
+        bigint(20) term_id FK
+        varchar(255) meta_key
+        longtext meta_value
+    }
+    wp_terms {
+        bigint(20) term_id PK
+        varchar(200) name
+        varchar(200) slug
+        bigint(10) term_group
+    }
+    wp_usermeta {
+        bigint(20) umeta_id PK
+        bigint(20) user_id FK
+        varchar(255) meta_key
+        longtext meta_value
+    }
+    wp_users {
+        bigint(20) ID PK
+        varchar(60) user_login
+        varchar(255) user_pass
+        varchar(50) user_nicename
+        varchar(100) user_email
+        varchar(100) user_url
+        datetime user_registered
+        varchar(255) user_activation_key
+        int(11) user_status
+        varchar(250) display_name
+    }
+    wp_comments ||--o{ wp_commentmeta : comment_ID
+    wp_comments }o--|| wp_posts : comment_post_ID
+    wp_comments }o--|| wp_users : user_id
+    wp_links }o--|| wp_users : link_owner
+    wp_postmeta }o--|| wp_posts : post_id
+    wp_posts }o--|| wp_users : post_author
+    wp_posts }o--|| wp_posts : post_parent
+    wp_term_relationships }o--|| wp_posts : object_id
+    wp_term_relationships }o--|| wp_links : object_id
+    wp_term_relationships }o--|| wp_term_taxonomy : term_taxonomy_id
+    wp_term_taxonomy }o--|| wp_terms : term_id
+    wp_termmeta }o--|| wp_terms : term_id
+    wp_usermeta }o--|| wp_users : user_id
