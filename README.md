@@ -21,7 +21,7 @@ The best database-design education is reading how real systems model real proble
 | [Mastodon](apps/mastodon/) | Decentralized social network | 116 | Ruby · PostgreSQL | AGPL-3.0+ | 🚧 in progress |
 | [MediaWiki](apps/mediawiki/) | The wiki engine behind Wikipedia | 64 | PHP · MySQL | GPL-2.0+ | ✅ done |
 | [Matomo](apps/matomo/) | Open-source web analytics | 26 | PHP · MySQL | GPL-3.0 | ✅ done |
-| [Penpot](apps/penpot/) | Open-source design & prototyping | 59 | Clojure · PostgreSQL | MPL-2.0 | 🚧 in progress |
+| [Penpot](apps/penpot/) | Open-source design & prototyping | 59 | Clojure · PostgreSQL | MPL-2.0 | ✅ done |
 
 One new schema every week.
 

@@ -1,0 +1,682 @@
+%% Diagrammed with FigSchema
+erDiagram
+    access_token {
+        uuid id PK
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+        text name
+        text token
+        text[] perms
+        timestamp_with_time_zone expires_at
+        text type
+    }
+    audit_log {
+        uuid id PK
+        text name
+        text type
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone archived_at
+        uuid profile_id
+        jsonb props
+        inet ip_addr
+        timestamp_with_time_zone tracked_at
+        text source
+        jsonb context
+    }
+    comment {
+        uuid id PK
+        uuid thread_id FK
+        uuid owner_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        text content
+        uuid[] mentions
+    }
+    comment_thread {
+        uuid id PK
+        uuid file_id FK
+        uuid owner_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        uuid page_id
+        jsonb participants
+        integer seqn
+        point position
+        boolean is_resolved
+        text page_name
+        uuid frame_id
+        uuid[] mentions
+    }
+    comment_thread_status {
+        uuid thread_id FK
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+    }
+    file {
+        uuid id PK
+        uuid project_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text name
+        boolean is_shared
+        boolean has_media_trimmed
+        bigint revn
+        bytea data
+        timestamp_with_time_zone ignore_sync_until
+        integer comment_thread_seqn
+        text data_backend
+        text[] features
+        integer version
+        integer vern
+    }
+    file_change {
+        uuid id PK
+        uuid file_id FK
+        timestamp_with_time_zone created_at
+        uuid session_id
+        bigint revn
+        bytea data
+        bytea changes
+        uuid profile_id FK
+        text[] features
+        text label
+        text data_backend
+        uuid data_ref_id
+        integer version
+        text created_by
+        timestamp_with_time_zone updated_at
+        timestamp_with_time_zone deleted_at
+        uuid locked_by FK
+        text[] migrations
+    }
+    file_data {
+        uuid file_id FK
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_00 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_01 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_02 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_03 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_04 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_05 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_06 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_07 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_08 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_09 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_10 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_11 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_12 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_13 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_14 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_15 {
+        uuid file_id
+        uuid id
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text type
+        text backend
+        jsonb metadata
+        bytea data
+    }
+    file_data_fragment {
+        uuid id
+        uuid file_id FK
+        timestamp_with_time_zone created_at
+        jsonb metadata
+        timestamp_with_time_zone deleted_at
+        bytea data
+        text data_backend
+        uuid data_ref_id
+    }
+    file_library_rel {
+        uuid file_id FK
+        uuid library_file_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone synced_at
+    }
+    file_library_sync {
+        uuid file_id
+        uuid library_file_id
+        timestamp_with_time_zone synced_at
+    }
+    file_media_object {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone deleted_at
+        text name
+        integer width
+        integer height
+        text mtype
+        uuid file_id FK
+        boolean is_local
+        uuid media_id FK
+        uuid thumbnail_id FK
+    }
+    file_migration {
+        uuid file_id FK
+        text name
+        timestamp_with_time_zone created_at
+    }
+    file_profile_rel {
+        uuid file_id FK
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        boolean is_owner
+        boolean is_admin
+        boolean can_edit
+    }
+    file_tagged_object_thumbnail {
+        uuid file_id FK
+        text tag
+        text object_id
+        uuid media_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+        timestamp_with_time_zone deleted_at
+    }
+    file_thumbnail {
+        uuid file_id FK
+        bigint revn
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+        timestamp_with_time_zone deleted_at
+        text data
+        jsonb props
+        uuid media_id FK
+    }
+    global_complaint_report {
+        text email
+        timestamp_with_time_zone created_at
+        text type
+        jsonb content
+    }
+    http_session {
+        text id PK
+        timestamp_with_time_zone created_at
+        uuid profile_id FK
+        text user_agent
+        timestamp_with_time_zone updated_at
+    }
+    http_session_v2 {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        uuid profile_id FK
+        text user_agent
+        uuid sso_provider_id FK
+        text sso_session_id
+        jsonb props
+    }
+    page {
+        uuid id PK
+        uuid file_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        bigint revn
+        text share_token
+        smallint ordering
+        text name
+        bytea data
+    }
+    presence {
+        uuid file_id FK
+        uuid profile_id FK
+        uuid session_id
+        timestamp_with_time_zone updated_at
+    }
+    profile {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text fullname
+        text email
+        text password
+        text lang
+        text theme
+        boolean is_demo
+        boolean is_active
+        jsonb props
+        uuid photo_id FK
+        boolean is_muted
+        text auth_backend
+        boolean is_blocked
+        uuid default_project_id FK
+        uuid default_team_id FK
+    }
+    profile_complaint_report {
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        text type
+        jsonb content
+    }
+    project {
+        uuid id PK
+        uuid team_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        boolean is_default
+        text name
+    }
+    project_profile_rel {
+        uuid profile_id FK
+        uuid project_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        boolean is_owner
+        boolean is_admin
+        boolean can_edit
+        uuid id PK
+    }
+    scheduled_task {
+        text id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        text cron_expr
+    }
+    scheduled_task_history {
+        uuid id
+        text task_id FK
+        timestamp_with_time_zone created_at
+        boolean is_error
+        text reason
+    }
+    server_error_report {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        jsonb content
+        integer version
+        integer source
+    }
+    server_prop {
+        text id PK
+        jsonb content
+        boolean preload
+    }
+    share_link {
+        uuid id PK
+        uuid file_id FK
+        uuid owner_id FK
+        timestamp_with_time_zone created_at
+        uuid[] pages
+        text[] flags
+        text who_comment
+        text who_inspect
+    }
+    sso_provider {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        boolean is_enabled
+        text type
+        text domain
+        text client_id
+        text client_secret
+        text base_uri
+        text token_uri
+        text auth_uri
+        text user_uri
+        text jwks_uri
+        text logout_uri
+        text roles_attr
+        text email_attr
+        text name_attr
+        text user_info_source
+        text[] scopes
+        text[] roles
+    }
+    storage_object {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone deleted_at
+        bigint size
+        text backend
+        jsonb metadata
+        timestamp_with_time_zone touched_at
+    }
+    task {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone completed_at
+        timestamp_with_time_zone scheduled_at
+        smallint priority
+        text queue
+        text name
+        jsonb props
+        text error
+        smallint retry_num
+        smallint max_retries
+        text status
+        text label
+    }
+    team {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        text name
+        boolean is_default
+        uuid photo_id FK
+        text[] features
+    }
+    team_access_request {
+        uuid id PK
+        uuid team_id FK
+        uuid requester_id FK
+        timestamp_with_time_zone valid_until
+        timestamp_with_time_zone auto_join_until
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+    }
+    team_font_variant {
+        uuid id PK
+        uuid team_id FK
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        timestamp_with_time_zone deleted_at
+        uuid font_id
+        text font_family
+        smallint font_weight
+        text font_style
+        uuid otf_file_id FK
+        uuid ttf_file_id FK
+        uuid woff1_file_id FK
+        uuid woff2_file_id FK
+        text variant_name
+    }
+    team_invitation {
+        uuid team_id FK
+        text email_to
+        text role
+        timestamp_with_time_zone valid_until
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+        uuid id PK
+        uuid created_by FK
+        uuid org_id
+    }
+    team_profile_rel {
+        uuid team_id FK
+        uuid profile_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        boolean is_admin
+        boolean is_owner
+        boolean can_edit
+        uuid id PK
+    }
+    team_project_profile_rel {
+        uuid team_id FK
+        uuid profile_id FK
+        uuid project_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone modified_at
+        boolean is_pinned
+        uuid id PK
+    }
+    upload_session {
+        uuid id PK
+        timestamp_with_time_zone created_at
+        uuid profile_id FK
+        integer total_chunks
+    }
+    usage_quote {
+        uuid id PK
+        text target
+        bigint quote
+        uuid profile_id FK
+        uuid project_id FK
+        uuid team_id FK
+        uuid file_id FK
+    }
+    webhook {
+        uuid id PK
+        uuid team_id FK
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
+        text uri
+        text mtype
+        text error_code
+        smallint error_count
+        boolean is_active
+        text secret_key
+        uuid profile_id FK
+    }
+    webhook_delivery {
+        uuid webhook_id FK
+        timestamp_with_time_zone created_at
+        text error_code
+        jsonb req_data
+        jsonb rsp_data
+    }
+    access_token }o--|| profile : profile_id
+    comment_thread_status }o--|| profile : profile_id
+    comment_thread_status }o--|| comment_thread : thread_id
+    comment_thread }o--|| file : file_id
+    comment_thread }o--|| profile : owner_id
+    comment }o--|| profile : owner_id
+    comment }o--|| comment_thread : thread_id
+    file_change }o--|| file : file_id
+    file_change }o--|| profile : locked_by
+    file_change }o--|| profile : profile_id
+    file_data_fragment }o--|| file : file_id
+    file_data }o--|| file : file_id
+    file_library_rel }o--|| file : file_id
+    file_library_rel }o--|| file : library_file_id
+    file_media_object }o--|| file : file_id
+    file_media_object }o--|| storage_object : media_id
+    file_media_object }o--|| storage_object : thumbnail_id
+    file_migration }o--|| file : file_id
+    file_profile_rel }o--|| file : file_id
+    file_profile_rel }o--|| profile : profile_id
+    file_tagged_object_thumbnail }o--|| file : file_id
+    file_tagged_object_thumbnail }o--|| storage_object : media_id
+    file_thumbnail }o--|| file : file_id
+    file_thumbnail }o--|| storage_object : media_id
+    file }o--|| project : project_id
+    http_session_v2 }o--|| profile : profile_id
+    http_session_v2 }o--|| sso_provider : sso_provider_id
+    http_session }o--|| profile : profile_id
+    page }o--|| file : file_id
+    presence }o--|| file : file_id
+    presence }o--|| profile : profile_id
+    profile_complaint_report }o--|| profile : profile_id
+    profile }o--|| project : default_project_id
+    profile }o--|| team : default_team_id
+    profile }o--|| storage_object : photo_id
+    project_profile_rel }o--|| profile : profile_id
+    project_profile_rel }o--|| project : project_id
+    project }o--|| team : team_id
+    scheduled_task_history }o--|| scheduled_task : task_id
+    share_link }o--|| file : file_id
+    share_link }o--|| profile : owner_id
+    team_access_request }o--|| profile : requester_id
+    team_access_request }o--|| team : team_id
+    team_font_variant }o--|| storage_object : otf_file_id
+    team_font_variant }o--|| profile : profile_id
+    team_font_variant }o--|| team : team_id
+    team_font_variant }o--|| storage_object : ttf_file_id
+    team_font_variant }o--|| storage_object : woff1_file_id
+    team_font_variant }o--|| storage_object : woff2_file_id
+    team_invitation }o--|| profile : created_by
+    team_invitation }o--|| team : team_id
+    team_profile_rel }o--|| profile : profile_id
+    team_profile_rel }o--|| team : team_id
+    team_project_profile_rel }o--|| profile : profile_id
+    team_project_profile_rel }o--|| project : project_id
+    team_project_profile_rel }o--|| team : team_id
+    team }o--|| storage_object : photo_id
+    upload_session }o--|| profile : profile_id
+    usage_quote }o--|| file : file_id
+    usage_quote }o--|| profile : profile_id
+    usage_quote }o--|| project : project_id
+    usage_quote }o--|| team : team_id
+    webhook_delivery }o--|| webhook : webhook_id
+    webhook }o--|| profile : profile_id
+    webhook }o--|| team : team_id

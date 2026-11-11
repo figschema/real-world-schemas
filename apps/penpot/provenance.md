@@ -38,7 +38,8 @@ Alternative reproduction path: install Penpot from docker-compose against Postgr
 - [x] captured from Penpot 2.18.5 on 2026-11-02
 - [x] replay stack + dump stored locally in `work/`, confirmed gitignored
 - [x] table/FK counts verified against the dump (59 · 65)
-- [ ] SVG + thumbnail exported
-- [ ] DBML exported from FigSchema
-- [ ] dictionary.md exported from FigSchema
-- [ ] FigJam Community file published, link added to the entry
+- [x] SVG + thumbnail exported
+- [x] DBML exported from FigSchema
+- [x] dictionary.md exported from FigSchema
+- [x] mermaid exported from FigSchema
+- [x] FigJam Community file published, link added to the entry

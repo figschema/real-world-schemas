@@ -1,6 +1,6 @@
 # Penpot database schema
 
-> 🚧 **In progress** - captured, being arranged. This banner disappears when the diagram lands.
+> ![Penpot database schema - ER diagram](schema.svg)
 
 The database behind the open-source design-and-prototyping platform: 59 tables, 65 foreign keys with real engine-level integrity, and file data sharded across sixteen physical tables.
 
@@ -32,7 +32,7 @@ The database behind the open-source design-and-prototyping platform: 59 tables, 
 
 ## Interactive version
 
-⏳ Public FigJam file - link lands after the Community publish.
+**[Matomo Database Schema - ER Diagram · Real-World Schemas #3](https://www.figma.com/community/file/1702322557264441349)**
 
 ---
 
