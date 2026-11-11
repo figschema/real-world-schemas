@@ -36,4 +36,5 @@ Alternative reproduction path: install Ghost against MySQL 8 and `mysqldump --no
 - [x] SVG + thumbnail exported
 - [x] DBML exported from FigSchema
 - [x] dictionary.md exported from FigSchema
+- [x] mermaid exported from FigSchema
 - [x] FigJam Community file published, link added to the entry

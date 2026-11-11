@@ -1,0 +1,1225 @@
+%% Diagrammed with FigSchema
+erDiagram
+    actions {
+        varchar(24) id PK
+        varchar(24) resource_id
+        varchar(50) resource_type
+        varchar(24) actor_id
+        varchar(50) actor_type
+        varchar(50) event
+        text context
+        datetime created_at
+    }
+    api_keys {
+        varchar(24) id PK
+        varchar(50) type
+        varchar(191) secret UK
+        varchar(24) role_id
+        varchar(24) integration_id
+        varchar(24) user_id
+        datetime last_seen_at
+        varchar(50) last_seen_version
+        datetime created_at
+        datetime updated_at
+    }
+    automated_email_recipients {
+        varchar(24) id PK
+        varchar(24) automated_email_id FK
+        varchar(24) automation_action_revision_id FK
+        varchar(24) automation_run_step_id FK
+        varchar(24) member_id
+        varchar(36) member_uuid
+        varchar(191) member_email
+        varchar(191) member_name
+        varchar(1000) mailgun_message_id
+        datetime delivered_at
+        datetime opened_at
+        datetime clicked_at
+        tinyint(1) track_opens
+        tinyint(1) track_clicks
+        datetime created_at
+        datetime updated_at
+    }
+    automation_action_edges {
+        varchar(24) source_action_id PK
+        varchar(24) target_action_id PK
+    }
+    automation_action_revisions {
+        varchar(24) id PK
+        datetime created_at UK
+        varchar(24) action_id FK
+        int_unsigned wait_hours
+        varchar(300) email_subject
+        longtext email_lexical
+        varchar(24) email_design_setting_id FK
+        int_unsigned email_sent_count
+        int_unsigned email_opened_count
+        int_unsigned email_clicked_count
+    }
+    automation_actions {
+        varchar(24) id PK
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+        varchar(24) automation_id FK
+        varchar(50) type
+    }
+    automation_run_steps {
+        varchar(24) id PK
+        datetime created_at
+        datetime updated_at
+        varchar(24) automation_run_id FK
+        varchar(24) automation_action_revision_id FK
+        datetime ready_at
+        int_unsigned step_attempts
+        datetime started_at
+        datetime finished_at
+        varchar(50) status
+        varchar(191) locked_by
+        datetime locked_at
+    }
+    automation_runs {
+        varchar(24) id PK
+        datetime created_at
+        datetime updated_at
+        varchar(24) automation_id FK
+        varchar(24) member_id FK
+        varchar(191) member_email
+    }
+    automation_trigger_tiers {
+        varchar(24) automation_id FK
+        varchar(24) product_id FK
+    }
+    automations {
+        varchar(24) id PK
+        varchar(50) status
+        varchar(191) name
+        varchar(2000) description
+        varchar(191) slug UK
+        varchar(50) trigger_tier_scope
+        datetime created_at
+        datetime updated_at
+    }
+    benefits {
+        varchar(24) id PK
+        varchar(191) name
+        varchar(191) slug UK
+        datetime created_at
+        datetime updated_at
+    }
+    brute {
+        varchar(191) key PK
+        bigint firstRequest
+        bigint lastRequest
+        bigint lifetime
+        int count
+    }
+    collections {
+        varchar(24) id PK
+        varchar(191) title
+        varchar(191) slug UK
+        varchar(2000) description
+        varchar(50) type
+        text filter
+        varchar(2000) feature_image
+        datetime created_at
+        datetime updated_at
+    }
+    collections_posts {
+        varchar(24) id PK
+        varchar(24) collection_id FK
+        varchar(24) post_id FK
+        int_unsigned sort_order
+    }
+    comment_likes {
+        varchar(24) id PK
+        varchar(24) comment_id FK
+        varchar(24) member_id FK
+        int score
+        datetime created_at
+        datetime updated_at
+    }
+    comment_reports {
+        varchar(24) id PK
+        varchar(24) comment_id FK
+        varchar(24) member_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    comments {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        varchar(24) member_id FK
+        varchar(24) parent_id FK
+        varchar(24) in_reply_to_id FK
+        varchar(50) status
+        longtext html
+        datetime edited_at
+        datetime pinned_at
+        datetime created_at
+        datetime updated_at
+    }
+    custom_theme_settings {
+        varchar(24) id PK
+        varchar(191) theme
+        varchar(191) key
+        varchar(50) type
+        text value
+    }
+    donation_payment_events {
+        varchar(24) id PK
+        varchar(191) name
+        varchar(191) email
+        varchar(24) member_id FK
+        int amount
+        varchar(50) currency
+        varchar(24) attribution_id
+        varchar(50) attribution_type
+        varchar(2000) attribution_url
+        varchar(191) referrer_source
+        varchar(191) referrer_medium
+        varchar(2000) referrer_url
+        varchar(191) utm_source
+        varchar(191) utm_medium
+        varchar(191) utm_campaign
+        varchar(191) utm_term
+        varchar(191) utm_content
+        datetime created_at
+        varchar(255) donation_message
+    }
+    email_batches {
+        varchar(24) id PK
+        varchar(24) email_id FK
+        varchar(255) mailgun_message_id
+        tinyint(1) fallback_sending_domain
+        varchar(50) status
+        text member_segment
+        int_unsigned recipient_count
+        int_unsigned submission_excluded_count
+        int_unsigned submitted_count
+        int_unsigned error_status_code
+        varchar(2000) error_message
+        longtext error_data
+        datetime created_at
+        datetime updated_at
+    }
+    email_design_settings {
+        varchar(24) id PK
+        varchar(191) slug UK
+        varchar(50) background_color
+        varchar(50) header_background_color
+        varchar(2000) header_image
+        tinyint(1) show_header_icon
+        tinyint(1) show_header_title
+        text footer_content
+        varchar(50) button_color
+        varchar(50) button_corners
+        varchar(50) button_style
+        varchar(50) link_color
+        varchar(50) link_style
+        varchar(191) body_font_category
+        varchar(191) title_font_category
+        varchar(50) title_font_weight
+        varchar(50) image_corners
+        varchar(50) divider_color
+        varchar(50) section_title_color
+        tinyint(1) show_badge
+        varchar(191) sender_name
+        varchar(191) sender_email
+        varchar(191) sender_reply_to
+        datetime created_at
+        datetime updated_at
+    }
+    email_recipient_failures {
+        varchar(24) id PK
+        varchar(24) email_id FK
+        varchar(24) member_id
+        varchar(24) email_recipient_id FK
+        int_unsigned code
+        varchar(50) enhanced_code
+        varchar(2000) message
+        varchar(50) severity
+        datetime failed_at
+        varchar(255) event_id
+    }
+    email_recipients {
+        varchar(24) id PK
+        varchar(24) email_id FK
+        varchar(24) member_id
+        varchar(24) batch_id FK
+        datetime processed_at
+        datetime delivered_at
+        datetime opened_at
+        datetime failed_at
+        varchar(36) member_uuid
+        varchar(191) member_email
+        varchar(191) member_name
+    }
+    email_spam_complaint_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) email_id FK
+        varchar(191) email_address
+        datetime created_at
+    }
+    emails {
+        varchar(24) id PK
+        varchar(24) post_id UK
+        varchar(36) uuid
+        varchar(50) status
+        text recipient_filter
+        varchar(2000) error
+        longtext error_data
+        int_unsigned email_count
+        int_unsigned csd_email_count
+        int_unsigned preflight_email_count
+        int_unsigned candidate_count
+        int_unsigned preparation_excluded_count
+        datetime prepared_at
+        int_unsigned delivered_count
+        int_unsigned opened_count
+        int_unsigned failed_count
+        varchar(300) subject
+        varchar(2000) from
+        varchar(2000) reply_to
+        longtext html
+        longtext plaintext
+        longtext source
+        varchar(50) source_type
+        tinyint(1) track_opens
+        tinyint(1) track_clicks
+        tinyint(1) feedback_enabled
+        datetime submitted_at
+        varchar(24) newsletter_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    gift_deliveries {
+        varchar(24) id PK
+        varchar(24) gift_id FK
+        varchar(191) recipient_email
+        varchar(50) status
+        datetime scheduled_at
+        datetime started_at
+        datetime email_sent_at
+        varchar(1000) email_provider_message_id
+        varchar(50) outcome
+        datetime outcome_at
+        text outcome_error
+    }
+    gift_links {
+        varchar(32) token PK
+        varchar(24) post_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    gifts {
+        varchar(24) id PK
+        varchar(48) token UK
+        varchar(191) buyer_email
+        varchar(24) buyer_member_id FK
+        varchar(191) buyer_name
+        varchar(191) recipient_name
+        text personal_message
+        varchar(24) redeemer_member_id FK
+        varchar(24) tier_id FK
+        varchar(50) cadence
+        int_unsigned duration
+        varchar(50) currency
+        int_unsigned amount
+        varchar(255) stripe_checkout_session_id UK
+        varchar(255) stripe_payment_intent_id UK
+        datetime checkout_started_at
+        datetime consumes_at
+        datetime expires_at
+        varchar(50) status
+        datetime purchased_at
+        datetime redeemed_at
+        datetime consumed_at
+        datetime expired_at
+        datetime refunded_at
+        datetime consumes_soon_reminder_sent_at
+    }
+    integrations {
+        varchar(24) id PK
+        varchar(50) type
+        varchar(191) name
+        varchar(191) slug UK
+        varchar(2000) icon_image
+        varchar(2000) description
+        datetime created_at
+        datetime updated_at
+    }
+    invites {
+        varchar(24) id PK
+        varchar(24) role_id
+        varchar(50) status
+        varchar(191) token UK
+        varchar(191) email UK
+        bigint expires
+        datetime created_at
+        datetime updated_at
+    }
+    jobs {
+        varchar(24) id PK
+        varchar(191) name UK
+        varchar(50) status
+        datetime started_at
+        datetime finished_at
+        datetime created_at
+        datetime updated_at
+        varchar(2000) metadata
+        int_unsigned queue_entry
+    }
+    labels {
+        varchar(24) id PK
+        varchar(191) name UK
+        varchar(191) slug UK
+        datetime created_at
+        datetime updated_at
+    }
+    machine_payment_events {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        int amount
+        varchar(50) currency
+        varchar(50) protocol UK
+        varchar(50) method
+        varchar(255) stripe_payment_intent_id UK
+        varchar(255) reference UK
+        datetime created_at
+    }
+    members {
+        varchar(24) id PK
+        varchar(36) uuid UK
+        varchar(191) transient_id UK
+        varchar(191) email UK
+        varchar(50) status
+        varchar(191) name
+        varchar(191) expertise
+        varchar(2000) note
+        varchar(2000) geolocation
+        tinyint(1) enable_comment_notifications
+        tinyint(1) enable_updates_and_announcements
+        int_unsigned email_count
+        int_unsigned email_opened_count
+        int_unsigned email_open_rate
+        tinyint(1) email_disabled
+        datetime last_seen_at
+        datetime last_commented_at
+        text commenting
+        datetime created_at
+        datetime updated_at
+    }
+    members_cancel_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(255) from_plan
+        datetime created_at
+    }
+    members_click_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) redirect_id FK
+        datetime created_at
+    }
+    members_created_events {
+        varchar(24) id PK
+        datetime created_at
+        varchar(24) member_id FK
+        varchar(24) attribution_id
+        varchar(50) attribution_type
+        varchar(2000) attribution_url
+        varchar(191) referrer_source
+        varchar(191) referrer_medium
+        varchar(2000) referrer_url
+        varchar(191) utm_source
+        varchar(191) utm_medium
+        varchar(191) utm_campaign
+        varchar(191) utm_term
+        varchar(191) utm_content
+        varchar(50) source
+        varchar(24) batch_id
+    }
+    members_current_subscription {
+        varchar(24) member_id PK
+        varchar(24) subscription_id FK
+    }
+    members_email_change_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(191) to_email
+        varchar(191) from_email
+        datetime created_at
+    }
+    members_feedback {
+        varchar(24) id PK
+        int_unsigned score
+        varchar(24) member_id FK
+        varchar(24) post_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    members_labels {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) label_id FK
+        int_unsigned sort_order
+    }
+    members_login_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        datetime created_at
+    }
+    members_metafield_bindings {
+        varchar(24) id PK
+        varchar(191) port UK
+        varchar(191) metafield_key FK
+        datetime created_at
+        datetime updated_at
+    }
+    members_metafield_change_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(50) written_by_type
+        varchar(24) written_by_id
+        varchar(50) source
+        mediumtext metafields
+        datetime created_at
+    }
+    members_metafield_values {
+        varchar(24) id PK
+        varchar(191) metafield_key FK
+        varchar(24) member_id FK
+        varchar(191) path UK
+        text value_text
+        varchar(50) written_by_type
+        varchar(24) written_by_id
+        datetime created_at
+        datetime updated_at
+    }
+    members_metafields {
+        varchar(24) id PK
+        varchar(191) key UK
+        varchar(191) name UK
+        varchar(50) type
+        varchar(50) status
+        varchar(50) member_access
+        int_unsigned sort_order
+        datetime created_at
+        datetime updated_at
+    }
+    members_newsletters {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) newsletter_id FK
+    }
+    members_paid_subscription_events {
+        varchar(24) id PK
+        varchar(50) type
+        varchar(24) member_id FK
+        varchar(24) subscription_id
+        varchar(255) from_plan
+        varchar(255) to_plan
+        varchar(191) currency
+        varchar(50) source
+        int mrr_delta
+        datetime created_at
+    }
+    members_payment_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        int amount
+        varchar(191) currency
+        varchar(50) source
+        datetime created_at
+    }
+    members_product_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) product_id FK
+        varchar(50) action
+        datetime created_at
+    }
+    members_products {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(24) product_id FK
+        int_unsigned sort_order
+        datetime expiry_at
+    }
+    members_status_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(50) from_status
+        varchar(50) to_status
+        datetime created_at
+        varchar(24) batch_id
+    }
+    members_stripe_customers {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        varchar(255) customer_id UK
+        varchar(191) name
+        varchar(191) email
+        datetime created_at
+        datetime updated_at
+    }
+    members_stripe_customers_subscriptions {
+        varchar(24) id PK
+        varchar(255) customer_id FK
+        varchar(24) ghost_subscription_id FK
+        varchar(255) subscription_id UK
+        varchar(255) stripe_price_id
+        varchar(50) status
+        tinyint(1) cancel_at_period_end
+        varchar(500) cancellation_reason
+        datetime current_period_end
+        datetime start_date
+        varchar(4) default_payment_card_last4
+        datetime created_at
+        datetime updated_at
+        int_unsigned mrr
+        varchar(24) offer_id FK
+        datetime discount_start
+        datetime discount_end
+        datetime trial_start_at
+        datetime trial_end_at
+        varchar(255) plan_id
+        varchar(255) plan_nickname
+        varchar(50) plan_interval
+        int plan_amount
+        varchar(191) plan_currency
+    }
+    members_subscribe_events {
+        varchar(24) id PK
+        varchar(24) member_id FK
+        tinyint(1) subscribed
+        datetime created_at
+        varchar(50) source
+        varchar(24) newsletter_id FK
+    }
+    members_subscription_created_events {
+        varchar(24) id PK
+        datetime created_at
+        varchar(24) member_id FK
+        varchar(24) subscription_id FK
+        varchar(24) attribution_id
+        varchar(50) attribution_type
+        varchar(2000) attribution_url
+        varchar(191) referrer_source
+        varchar(191) referrer_medium
+        varchar(2000) referrer_url
+        varchar(191) utm_source
+        varchar(191) utm_medium
+        varchar(191) utm_campaign
+        varchar(191) utm_term
+        varchar(191) utm_content
+        varchar(24) batch_id
+    }
+    mentions {
+        varchar(24) id PK
+        varchar(2000) source
+        varchar(2000) source_title
+        varchar(2000) source_site_title
+        varchar(2000) source_excerpt
+        varchar(2000) source_author
+        varchar(2000) source_featured_image
+        varchar(2000) source_favicon
+        varchar(2000) target
+        varchar(24) resource_id
+        varchar(50) resource_type
+        datetime created_at
+        text payload
+        tinyint(1) deleted
+        tinyint(1) verified
+        int_unsigned revalidation_failure_count
+    }
+    milestones {
+        varchar(24) id PK
+        varchar(24) type
+        int value
+        varchar(24) currency
+        datetime created_at
+        datetime email_sent_at
+    }
+    mobiledoc_revisions {
+        varchar(24) id PK
+        varchar(24) post_id
+        longtext mobiledoc
+        bigint created_at_ts
+        datetime created_at
+    }
+    newsletters {
+        varchar(24) id PK
+        varchar(36) uuid UK
+        varchar(191) name UK
+        varchar(2000) description
+        tinyint(1) feedback_enabled
+        varchar(191) slug UK
+        varchar(191) sender_name
+        varchar(191) sender_email
+        varchar(191) sender_reply_to
+        varchar(50) status
+        varchar(50) visibility
+        tinyint(1) subscribe_on_signup
+        int_unsigned sort_order
+        varchar(2000) header_image
+        tinyint(1) show_header_icon
+        tinyint(1) show_header_title
+        tinyint(1) show_excerpt
+        varchar(191) title_font_category
+        varchar(191) title_alignment
+        tinyint(1) show_feature_image
+        varchar(191) body_font_category
+        text footer_content
+        tinyint(1) show_badge
+        tinyint(1) show_header_name
+        tinyint(1) show_post_title_section
+        tinyint(1) show_comment_cta
+        tinyint(1) show_subscription_details
+        tinyint(1) show_latest_posts
+        tinyint(1) show_share_button
+        varchar(50) background_color
+        varchar(50) post_title_color
+        datetime created_at
+        datetime updated_at
+        varchar(50) button_corners
+        varchar(50) button_style
+        varchar(50) title_font_weight
+        varchar(50) link_style
+        varchar(50) image_corners
+        varchar(50) header_background_color
+        varchar(50) section_title_color
+        varchar(50) divider_color
+        varchar(50) button_color
+        varchar(50) link_color
+    }
+    offer_redemptions {
+        varchar(24) id PK
+        varchar(24) offer_id FK
+        varchar(24) member_id FK
+        varchar(24) subscription_id FK
+        datetime created_at
+    }
+    offers {
+        varchar(24) id PK
+        tinyint(1) active
+        varchar(191) name UK
+        varchar(191) code UK
+        varchar(24) product_id FK
+        varchar(255) stripe_coupon_id UK
+        varchar(50) interval
+        varchar(50) currency
+        varchar(50) discount_type
+        int discount_amount
+        varchar(50) duration
+        int duration_in_months
+        varchar(191) portal_title
+        varchar(2000) portal_description
+        varchar(50) redemption_type
+        datetime created_at
+        datetime updated_at
+    }
+    outbox {
+        varchar(24) id PK
+        varchar(50) event_type
+        varchar(50) status
+        text payload
+        datetime created_at
+        datetime updated_at
+        int_unsigned retry_count
+        datetime last_retry_at
+        varchar(2000) message
+    }
+    permissions {
+        varchar(24) id PK
+        varchar(50) name UK
+        varchar(50) object_type
+        varchar(50) action_type
+        varchar(24) object_id
+        datetime created_at
+        datetime updated_at
+    }
+    permissions_roles {
+        varchar(24) id PK
+        varchar(24) role_id
+        varchar(24) permission_id
+    }
+    permissions_users {
+        varchar(24) id PK
+        varchar(24) user_id
+        varchar(24) permission_id
+    }
+    post_gift_links {
+        varchar(24) post_id FK
+        varchar(32) gift_link_token PK
+        datetime created_at
+        datetime updated_at
+    }
+    post_revisions {
+        varchar(24) id PK
+        varchar(24) post_id
+        longtext lexical
+        bigint created_at_ts
+        datetime created_at
+        varchar(24) author_id FK
+        varchar(2000) title
+        varchar(50) post_status
+        varchar(50) reason
+        varchar(2000) feature_image
+        varchar(2000) feature_image_alt
+        text feature_image_caption
+        varchar(2000) custom_excerpt
+    }
+    posts {
+        varchar(24) id PK
+        varchar(36) uuid
+        varchar(2000) title
+        varchar(191) slug UK
+        longtext mobiledoc
+        longtext lexical
+        longtext html
+        varchar(50) comment_id
+        longtext plaintext
+        varchar(2000) feature_image
+        tinyint(1) featured
+        varchar(50) type UK
+        varchar(50) status
+        varchar(6) locale
+        varchar(50) visibility
+        text email_recipient_filter
+        datetime created_at
+        datetime updated_at
+        datetime published_at
+        varchar(24) published_by
+        varchar(2000) custom_excerpt
+        varchar(500) auto_excerpt
+        int_unsigned reading_time
+        text codeinjection_head
+        text codeinjection_foot
+        varchar(100) custom_template
+        text canonical_url
+        varchar(24) newsletter_id FK
+        tinyint(1) show_title_and_feature_image
+    }
+    posts_authors {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        varchar(24) author_id FK
+        int_unsigned sort_order
+    }
+    posts_meta {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        varchar(2000) og_image
+        varchar(300) og_title
+        varchar(500) og_description
+        varchar(2000) twitter_image
+        varchar(300) twitter_title
+        varchar(500) twitter_description
+        varchar(2000) meta_title
+        varchar(2000) meta_description
+        varchar(300) email_subject
+        text frontmatter
+        varchar(2000) feature_image_alt
+        text feature_image_caption
+        tinyint(1) email_only
+    }
+    posts_products {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        varchar(24) product_id FK
+        int_unsigned sort_order
+    }
+    posts_tags {
+        varchar(24) id PK
+        varchar(24) post_id FK
+        varchar(24) tag_id FK
+        int_unsigned sort_order
+    }
+    products {
+        varchar(24) id PK
+        varchar(191) name
+        varchar(191) slug UK
+        tinyint(1) active
+        varchar(2000) welcome_page_url
+        varchar(50) visibility
+        int_unsigned trial_days
+        varchar(191) description
+        varchar(50) type
+        varchar(50) currency
+        int_unsigned monthly_price
+        int_unsigned yearly_price
+        datetime created_at
+        datetime updated_at
+        varchar(24) monthly_price_id
+        varchar(24) yearly_price_id
+    }
+    products_benefits {
+        varchar(24) id PK
+        varchar(24) product_id FK
+        varchar(24) benefit_id FK
+        int_unsigned sort_order
+    }
+    recommendation_click_events {
+        varchar(24) id PK
+        varchar(24) recommendation_id FK
+        varchar(24) member_id FK
+        datetime created_at
+    }
+    recommendation_subscribe_events {
+        varchar(24) id PK
+        varchar(24) recommendation_id FK
+        varchar(24) member_id FK
+        datetime created_at
+    }
+    recommendations {
+        varchar(24) id PK
+        varchar(2000) url
+        varchar(2000) title
+        varchar(2000) excerpt
+        varchar(2000) featured_image
+        varchar(2000) favicon
+        varchar(2000) description
+        tinyint(1) one_click_subscribe
+        datetime created_at
+        datetime updated_at
+    }
+    redirects {
+        varchar(24) id PK
+        varchar(191) from
+        varchar(2000) to
+        varchar(24) post_id FK
+        varchar(24) automation_action_revision_id FK
+        varbinary(32) to_hash UK
+        datetime created_at
+        datetime updated_at
+    }
+    roles {
+        varchar(24) id PK
+        varchar(50) name UK
+        varchar(2000) description
+        datetime created_at
+        datetime updated_at
+    }
+    roles_users {
+        varchar(24) id PK
+        varchar(24) role_id
+        varchar(24) user_id
+    }
+    sessions {
+        varchar(24) id PK
+        varchar(32) session_id UK
+        varchar(24) user_id
+        varchar(2000) session_data
+        datetime created_at
+        datetime updated_at
+    }
+    settings {
+        varchar(24) id PK
+        varchar(50) group
+        varchar(50) key UK
+        text value
+        varchar(50) type
+        varchar(50) flags
+        datetime created_at
+        datetime updated_at
+    }
+    snippets {
+        varchar(24) id PK
+        varchar(191) name UK
+        longtext mobiledoc
+        longtext lexical
+        datetime created_at
+        datetime updated_at
+    }
+    stripe_checkout_config {
+        varchar(24) id PK
+        varchar(191) slug UK
+        text design
+        text shipping
+        text phone
+        datetime created_at
+        datetime updated_at
+    }
+    stripe_checkout_config_tiers {
+        varchar(50) section PK
+        varchar(24) product_id PK
+    }
+    stripe_prices {
+        varchar(24) id PK
+        varchar(255) stripe_price_id UK
+        varchar(255) stripe_product_id FK
+        tinyint(1) active
+        varchar(255) nickname
+        varchar(191) currency
+        int amount
+        varchar(50) type
+        varchar(50) interval
+        varchar(191) description
+        datetime created_at
+        datetime updated_at
+    }
+    stripe_products {
+        varchar(24) id PK
+        varchar(24) product_id FK
+        varchar(255) stripe_product_id UK
+        datetime created_at
+        datetime updated_at
+    }
+    subscriptions {
+        varchar(24) id PK
+        varchar(50) type
+        varchar(50) status
+        varchar(24) member_id FK
+        varchar(24) tier_id FK
+        varchar(50) cadence
+        varchar(50) currency
+        int amount
+        varchar(50) payment_provider
+        varchar(2000) payment_subscription_url
+        varchar(2000) payment_user_url
+        varchar(24) offer_id FK
+        datetime expires_at
+        datetime created_at
+        datetime updated_at
+    }
+    suppressions {
+        varchar(24) id PK
+        varchar(191) email UK
+        varchar(24) email_id FK
+        varchar(50) reason
+        datetime created_at
+    }
+    tags {
+        varchar(24) id PK
+        varchar(191) name
+        varchar(191) slug UK
+        text description
+        varchar(2000) feature_image
+        varchar(191) parent_id
+        varchar(50) visibility
+        varchar(2000) og_image
+        varchar(300) og_title
+        varchar(500) og_description
+        varchar(2000) twitter_image
+        varchar(300) twitter_title
+        varchar(500) twitter_description
+        varchar(2000) meta_title
+        varchar(2000) meta_description
+        text codeinjection_head
+        text codeinjection_foot
+        varchar(2000) canonical_url
+        varchar(50) accent_color
+        datetime created_at
+        datetime updated_at
+    }
+    tinybird_syncs {
+        varchar(24) id PK
+        varchar(191) table_name UK
+        datetime last_synced_updated_at
+        varchar(24) last_synced_id
+        datetime created_at
+        datetime updated_at
+    }
+    tokens {
+        varchar(24) id PK
+        varchar(32) token
+        varchar(36) uuid UK
+        varchar(2000) data
+        datetime created_at
+        datetime updated_at
+        datetime first_used_at
+        int_unsigned used_count
+        int_unsigned otc_used_count
+    }
+    users {
+        varchar(24) id PK
+        varchar(191) name
+        varchar(191) slug UK
+        varchar(60) password
+        varchar(191) email UK
+        varchar(2000) profile_image
+        varchar(2000) cover_image
+        text bio
+        varchar(2000) website
+        text location
+        varchar(2000) facebook
+        varchar(2000) twitter
+        varchar(191) threads
+        varchar(191) bluesky
+        varchar(191) mastodon
+        varchar(191) tiktok
+        varchar(191) youtube
+        varchar(191) instagram
+        varchar(191) linkedin
+        text accessibility
+        varchar(50) status
+        varchar(6) locale
+        varchar(50) visibility
+        varchar(2000) meta_title
+        varchar(2000) meta_description
+        text tour
+        datetime last_seen
+        tinyint(1) comment_notifications
+        tinyint(1) free_member_signup_notification
+        tinyint(1) paid_subscription_started_notification
+        tinyint(1) paid_subscription_canceled_notification
+        tinyint(1) mention_notifications
+        tinyint(1) recommendation_notifications
+        tinyint(1) milestone_notifications
+        tinyint(1) donation_notifications
+        tinyint(1) gift_subscription_notifications
+        datetime created_at
+        datetime updated_at
+    }
+    webhooks {
+        varchar(24) id PK
+        varchar(50) event
+        varchar(2000) target_url
+        varchar(191) name
+        varchar(191) secret
+        varchar(50) api_version
+        varchar(24) integration_id FK
+        datetime last_triggered_at
+        varchar(50) last_triggered_status
+        varchar(50) last_triggered_error
+        datetime created_at
+        datetime updated_at
+    }
+    welcome_email_automated_emails {
+        varchar(24) id PK
+        varchar(24) welcome_email_automation_id FK
+        varchar(24) next_welcome_email_automated_email_id FK
+        int_unsigned delay_days
+        varchar(300) subject
+        longtext lexical
+        varchar(191) sender_name
+        varchar(191) sender_email
+        varchar(191) sender_reply_to
+        varchar(24) email_design_setting_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    welcome_email_automation_runs {
+        varchar(24) id PK
+        varchar(24) welcome_email_automation_id FK
+        varchar(24) member_id FK
+        varchar(24) next_welcome_email_automated_email_id FK
+        datetime ready_at
+        datetime step_started_at
+        int_unsigned step_attempts
+        varchar(50) exit_reason
+        datetime created_at
+        datetime updated_at
+    }
+    automated_email_recipients }o--|| welcome_email_automated_emails : automated_email_id
+    automated_email_recipients }o--|| automation_action_revisions : automation_action_revision_id
+    automated_email_recipients }o--|| automation_run_steps : automation_run_step_id
+    automation_action_edges ||--|| automation_actions : source_action_id
+    automation_action_edges ||--|| automation_actions : target_action_id
+    automation_action_revisions ||--|| automation_actions : action_id
+    automation_action_revisions }o--|| email_design_settings : email_design_setting_id
+    automation_actions }o--|| automations : automation_id
+    automation_run_steps }o--|| automation_action_revisions : automation_action_revision_id
+    automation_run_steps }o--|| automation_runs : automation_run_id
+    automation_runs }o--|| automations : automation_id
+    automation_runs }o--|| members : member_id
+    automation_trigger_tiers ||--|| automations : automation_id
+    automation_trigger_tiers ||--|| products : product_id
+    collections_posts }o--|| collections : collection_id
+    collections_posts }o--|| posts : post_id
+    comment_likes }o--|| comments : comment_id
+    comment_likes }o--|| members : member_id
+    comment_reports }o--|| comments : comment_id
+    comment_reports }o--|| members : member_id
+    comments }o--|| comments : in_reply_to_id
+    comments }o--|| members : member_id
+    comments }o--|| comments : parent_id
+    comments }o--|| posts : post_id
+    donation_payment_events }o--|| members : member_id
+    email_batches }o--|| emails : email_id
+    email_recipient_failures }o--|| emails : email_id
+    email_recipient_failures }o--|| email_recipients : email_recipient_id
+    email_recipients }o--|| email_batches : batch_id
+    email_recipients }o--|| emails : email_id
+    email_spam_complaint_events ||--|| emails : email_id
+    email_spam_complaint_events ||--|| members : member_id
+    emails }o--|| newsletters : newsletter_id
+    gift_deliveries ||--|| gifts : gift_id
+    gift_links }o--|| posts : post_id
+    gifts }o--|| members : buyer_member_id
+    gifts }o--|| members : redeemer_member_id
+    gifts }o--|| products : tier_id
+    machine_payment_events }o--|| posts : post_id
+    members_cancel_events }o--|| members : member_id
+    members_click_events }o--|| members : member_id
+    members_click_events }o--|| redirects : redirect_id
+    members_created_events }o--|| members : member_id
+    members_current_subscription ||--|| members : member_id
+    members_current_subscription ||--|| members_stripe_customers_subscriptions : subscription_id
+    members_email_change_events }o--|| members : member_id
+    members_feedback }o--|| members : member_id
+    members_feedback }o--|| posts : post_id
+    members_labels }o--|| labels : label_id
+    members_labels }o--|| members : member_id
+    members_login_events }o--|| members : member_id
+    members_metafield_bindings }o--|| members_metafields : metafield_key
+    members_metafield_change_events }o--|| members : member_id
+    members_metafield_values ||--|| members : member_id
+    members_metafield_values ||--|| members_metafields : metafield_key
+    members_newsletters }o--|| members : member_id
+    members_newsletters }o--|| newsletters : newsletter_id
+    members_paid_subscription_events }o--|| members : member_id
+    members_payment_events }o--|| members : member_id
+    members_product_events }o--|| members : member_id
+    members_product_events }o--|| products : product_id
+    members_products }o--|| members : member_id
+    members_products }o--|| products : product_id
+    members_status_events }o--|| members : member_id
+    members_stripe_customers_subscriptions }o--|| members_stripe_customers : customer_id
+    members_stripe_customers_subscriptions }o--|| subscriptions : ghost_subscription_id
+    members_stripe_customers_subscriptions }o--|| offers : offer_id
+    members_stripe_customers }o--|| members : member_id
+    members_subscribe_events }o--|| members : member_id
+    members_subscribe_events }o--|| newsletters : newsletter_id
+    members_subscription_created_events }o--|| members : member_id
+    members_subscription_created_events }o--|| members_stripe_customers_subscriptions : subscription_id
+    offer_redemptions }o--|| members : member_id
+    offer_redemptions }o--|| offers : offer_id
+    offer_redemptions }o--|| members_stripe_customers_subscriptions : subscription_id
+    offers }o--|| products : product_id
+    post_gift_links ||--|| gift_links : gift_link_token
+    post_gift_links ||--|| posts : post_id
+    post_revisions }o--|| users : author_id
+    posts_authors }o--|| users : author_id
+    posts_authors }o--|| posts : post_id
+    posts_meta ||--|| posts : post_id
+    posts_products }o--|| posts : post_id
+    posts_products }o--|| products : product_id
+    posts_tags }o--|| posts : post_id
+    posts_tags }o--|| tags : tag_id
+    posts }o--|| newsletters : newsletter_id
+    products_benefits }o--|| benefits : benefit_id
+    products_benefits }o--|| products : product_id
+    recommendation_click_events }o--|| members : member_id
+    recommendation_click_events }o--|| recommendations : recommendation_id
+    recommendation_subscribe_events }o--|| members : member_id
+    recommendation_subscribe_events }o--|| recommendations : recommendation_id
+    redirects ||--|| automation_action_revisions : automation_action_revision_id
+    redirects }o--|| posts : post_id
+    stripe_checkout_config_tiers ||--|| products : product_id
+    stripe_prices }o--|| stripe_products : stripe_product_id
+    stripe_products }o--|| products : product_id
+    subscriptions }o--|| members : member_id
+    subscriptions }o--|| offers : offer_id
+    subscriptions }o--|| products : tier_id
+    suppressions }o--|| emails : email_id
+    webhooks }o--|| integrations : integration_id
+    welcome_email_automated_emails }o--|| email_design_settings : email_design_setting_id
+    welcome_email_automated_emails }o--|| welcome_email_automated_emails : next_welcome_email_automated_email_id
+    welcome_email_automated_emails }o--|| automations : welcome_email_automation_id
+    welcome_email_automation_runs }o--|| members : member_id
+    welcome_email_automation_runs }o--|| welcome_email_automated_emails : next_welcome_email_automated_email_id
+    welcome_email_automation_runs }o--|| automations : welcome_email_automation_id
