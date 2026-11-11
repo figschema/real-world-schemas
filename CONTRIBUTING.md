@@ -7,7 +7,7 @@ Corrections, fixes and app suggestions are welcome. This repo is a curated, week
 Each entry has two kinds of files:
 
 - **Hand-made**: the annotation (`README.md` per app), `provenance.md`, and the diagram layout in FigJam
-- **Pipeline-generated**: `schema.svg`, `thumbnail.svg`, `schema.dbml`, `dictionary.md`
+- **Pipeline-generated**: `schema.svg`, `thumbnail.svg`, `schema.dbml`, `schema.mermaid`, `dictionary.md`
 
 Please don't hand-edit the generated files - they are regenerated from the capture, so manual edits would be overwritten and would break the "reproduce and diff us" promise. If a generated file is wrong, the *capture or converter* is wrong: open an issue with the evidence.
 
