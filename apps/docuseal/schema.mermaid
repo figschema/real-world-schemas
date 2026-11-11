@@ -1,0 +1,504 @@
+%% Diagrammed with FigSchema
+erDiagram
+    access_tokens {
+        bigserial id PK
+        timestamp created_at
+        text sha256
+        text token
+        timestamp updated_at
+        bigint user_id FK
+    }
+    account_accesses {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        timestamp updated_at
+        bigint user_id
+    }
+    account_configs {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        timestamp updated_at
+        text value
+        varchar(255) key
+    }
+    account_linked_accounts {
+        bigserial id PK
+        bigint account_id FK
+        text account_type
+        timestamp created_at
+        bigint linked_account_id FK
+        timestamp updated_at
+    }
+    accounts {
+        bigserial id PK
+        timestamp archived_at
+        timestamp created_at
+        varchar(255) locale
+        varchar(255) name
+        varchar(255) timezone
+        timestamp updated_at
+        varchar(255) uuid
+    }
+    active_storage_attachments {
+        bigserial id PK
+        bigint blob_id FK
+        timestamp created_at
+        varchar(255) name
+        bigint record_id
+        varchar(255) record_type
+        varchar(255) uuid
+    }
+    active_storage_blobs {
+        bigserial id PK
+        bigint byte_size
+        varchar(255) checksum
+        varchar(255) content_type
+        timestamp created_at
+        varchar(255) filename
+        text metadata
+        varchar(255) service_name
+        varchar(255) uuid
+        varchar(255) key
+    }
+    active_storage_variant_records {
+        bigserial id PK
+        bigint blob_id FK
+        varchar(255) variation_digest
+    }
+    completed_documents {
+        bigserial id PK
+        timestamp created_at
+        varchar(255) sha256
+        bigint submitter_id
+        timestamp updated_at
+    }
+    completed_submitters {
+        bigserial id PK
+        bigint account_id
+        timestamp completed_at
+        timestamp created_at
+        boolean is_first
+        integer sms_count
+        varchar(255) source
+        bigint submission_id
+        bigint submitter_id
+        bigint template_id
+        timestamp updated_at
+        varchar(255) verification_method
+    }
+    console1984_commands {
+        bigserial id PK
+        timestamp created_at
+        bigint sensitive_access_id
+        bigint session_id
+        text statements
+        timestamp updated_at
+    }
+    console1984_sensitive_accesses {
+        bigserial id PK
+        timestamp created_at
+        text justification
+        bigint session_id
+        timestamp updated_at
+    }
+    console1984_sessions {
+        bigserial id PK
+        timestamp created_at
+        text reason
+        timestamp updated_at
+        bigint user_id
+    }
+    console1984_users {
+        bigserial id PK
+        timestamp created_at
+        timestamp updated_at
+        varchar(255) username
+    }
+    document_generation_events {
+        bigserial id PK
+        timestamp created_at
+        varchar(255) event_name
+        bigint submitter_id FK
+        timestamp updated_at
+    }
+    document_metadata {
+        bigserial id PK
+        bigint account_id FK
+        varchar(255) blob_checksum
+        timestamp created_at
+        text text_runs
+    }
+    dynamic_document_versions {
+        bigserial id PK
+        text areas
+        timestamp created_at
+        bigint dynamic_document_id FK
+        varchar(255) sha1
+        timestamp updated_at
+    }
+    dynamic_documents {
+        bigserial id PK
+        text body
+        timestamp created_at
+        text head
+        varchar(255) sha1
+        bigint template_id FK
+        timestamp updated_at
+        varchar(255) uuid
+    }
+    email_events {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        text data
+        varchar(255) email
+        bigint emailable_id
+        varchar(255) emailable_type
+        timestamp event_datetime
+        varchar(255) event_type
+        varchar(255) message_id
+        varchar(255) tag
+    }
+    email_message_assets {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        text data
+        varchar(255) sha1
+        timestamp updated_at
+    }
+    email_messages {
+        bigserial id PK
+        bigint account_id FK
+        bigint author_id FK
+        text body
+        timestamp created_at
+        varchar(255) sha1
+        text subject
+        timestamp updated_at
+        varchar(255) uuid
+    }
+    encrypted_configs {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        timestamp updated_at
+        text value
+        varchar(255) key
+    }
+    encrypted_user_configs {
+        bigserial id PK
+        timestamp created_at
+        timestamp updated_at
+        bigint user_id FK
+        text value
+        varchar(255) key
+    }
+    lock_events {
+        bigserial id PK
+        timestamp created_at
+        varchar(255) event_name
+        timestamp updated_at
+        varchar(255) key
+    }
+    mcp_tokens {
+        bigserial id PK
+        timestamp archived_at
+        timestamp created_at
+        varchar(255) name
+        varchar(255) sha256
+        varchar(255) token_prefix
+        timestamp updated_at
+        bigint user_id FK
+    }
+    oauth_access_grants {
+        bigserial id PK
+        bigint application_id FK
+        varchar(255) code_challenge
+        varchar(255) code_challenge_method
+        timestamp created_at
+        integer expires_in
+        text redirect_uri
+        bigint resource_owner_id FK
+        timestamp revoked_at
+        varchar(255) scopes
+        varchar(255) token
+    }
+    oauth_access_tokens {
+        bigserial id PK
+        bigint application_id FK
+        timestamp created_at
+        integer expires_in
+        varchar(255) previous_refresh_token
+        varchar(255) refresh_token
+        bigint resource_owner_id FK
+        timestamp revoked_at
+        varchar(255) scopes
+        varchar(255) token
+    }
+    oauth_applications {
+        bigserial id PK
+        boolean confidential
+        timestamp created_at
+        varchar(255) name
+        text redirect_uri
+        varchar(255) scopes
+        varchar(255) secret
+        varchar(255) uid
+        timestamp updated_at
+    }
+    otp_challenges {
+        bigserial id PK
+        integer attempts
+        timestamp created_at
+        timestamp expire_at
+        varchar(255) nonce
+        timestamp verified_at
+        integer version
+        varchar(255) key
+    }
+    search_entries {
+        bigserial id PK
+        bigint account_id
+        timestamp created_at
+        tsvector ngram
+        bigint record_id
+        varchar(255) record_type
+        tsvector tsvector
+        timestamp updated_at
+    }
+    submission_events {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        text data
+        timestamp event_timestamp
+        varchar(255) event_type
+        bigint submission_id FK
+        bigint submitter_id FK
+        timestamp updated_at
+    }
+    submissions {
+        bigserial id PK
+        bigint account_id
+        timestamp archived_at
+        timestamp completed_at
+        timestamp created_at
+        bigint created_by_user_id FK
+        timestamp expire_at
+        text name
+        text preferences
+        varchar(255) slug
+        varchar(255) source
+        varchar(255) submitters_order
+        text template_fields
+        bigint template_id FK
+        text template_schema
+        text template_submitters
+        timestamp updated_at
+        text variables
+        text variables_schema
+    }
+    submitter_versions {
+        bigserial id PK
+        timestamp created_at
+        varchar(255) email
+        varchar(255) name
+        varchar(255) phone
+        varchar(255) slug
+        bigint submitter_id FK
+        timestamp updated_at
+    }
+    submitters {
+        bigserial id PK
+        bigint account_id
+        timestamp completed_at
+        timestamp created_at
+        timestamp declined_at
+        varchar(255) email
+        varchar(255) external_id
+        varchar(255) ip
+        text metadata
+        varchar(255) name
+        timestamp opened_at
+        varchar(255) phone
+        text preferences
+        timestamp sent_at
+        varchar(255) slug
+        bigint submission_id FK
+        varchar(255) timezone
+        varchar(255) ua
+        timestamp updated_at
+        varchar(255) uuid
+        text values
+    }
+    template_accesses {
+        bigserial id PK
+        timestamp created_at
+        bigint template_id FK
+        timestamp updated_at
+        bigint user_id
+    }
+    template_folders {
+        bigserial id PK
+        bigint account_id FK
+        timestamp archived_at
+        bigint author_id FK
+        timestamp created_at
+        varchar(255) name
+        bigint parent_folder_id FK
+        timestamp updated_at
+    }
+    template_sharings {
+        bigserial id PK
+        varchar(255) ability
+        bigint account_id
+        timestamp created_at
+        bigint template_id FK
+        timestamp updated_at
+    }
+    template_versions {
+        bigserial id PK
+        bigint account_id FK
+        bigint author_id FK
+        timestamp created_at
+        text data
+        varchar(255) sha1
+        bigint template_id FK
+        timestamp updated_at
+    }
+    templates {
+        bigserial id PK
+        bigint account_id FK
+        timestamp archived_at
+        bigint author_id FK
+        timestamp created_at
+        varchar(255) external_id
+        text fields
+        bigint folder_id FK
+        varchar(255) name
+        text preferences
+        text schema
+        boolean shared_link
+        varchar(255) slug
+        text source
+        text submitters
+        timestamp updated_at
+        text variables_schema
+    }
+    user_configs {
+        bigserial id PK
+        timestamp created_at
+        timestamp updated_at
+        bigint user_id FK
+        text value
+        varchar(255) key
+    }
+    users {
+        bigserial id PK
+        bigint account_id FK
+        timestamp archived_at
+        timestamp confirmation_sent_at
+        varchar(255) confirmation_token
+        timestamp confirmed_at
+        integer consumed_timestep
+        timestamp created_at
+        timestamp current_sign_in_at
+        varchar(255) current_sign_in_ip
+        varchar(255) email
+        varchar(255) encrypted_password
+        integer failed_attempts
+        varchar(255) first_name
+        varchar(255) last_name
+        timestamp last_sign_in_at
+        varchar(255) last_sign_in_ip
+        timestamp locked_at
+        boolean otp_required_for_login
+        varchar(255) otp_secret
+        timestamp remember_created_at
+        timestamp reset_password_sent_at
+        varchar(255) reset_password_token
+        varchar(255) role
+        integer sign_in_count
+        varchar(255) unconfirmed_email
+        varchar(255) unlock_token
+        timestamp updated_at
+        varchar(255) uuid
+    }
+    webhook_attempts {
+        bigserial id PK
+        integer attempt
+        timestamp created_at
+        text response_body
+        integer response_status_code
+        timestamp updated_at
+        bigint webhook_event_id
+    }
+    webhook_events {
+        bigserial id PK
+        bigint account_id
+        timestamp created_at
+        varchar(255) event_type
+        bigint record_id
+        varchar(255) record_type
+        varchar(255) status
+        timestamp updated_at
+        varchar(255) uuid
+        bigint webhook_url_id
+    }
+    webhook_urls {
+        bigserial id PK
+        bigint account_id FK
+        timestamp created_at
+        text events
+        text hmac_secret
+        text secret
+        varchar(255) sha1
+        timestamp updated_at
+        text url
+    }
+    access_tokens }o--|| users : user_id
+    account_accesses }o--|| accounts : account_id
+    account_configs }o--|| accounts : account_id
+    account_linked_accounts }o--|| accounts : account_id
+    account_linked_accounts }o--|| accounts : linked_account_id
+    active_storage_attachments }o--|| active_storage_blobs : blob_id
+    active_storage_variant_records }o--|| active_storage_blobs : blob_id
+    document_generation_events }o--|| submitters : submitter_id
+    document_metadata }o--|| accounts : account_id
+    dynamic_document_versions }o--|| dynamic_documents : dynamic_document_id
+    dynamic_documents }o--|| templates : template_id
+    email_events }o--|| accounts : account_id
+    email_message_assets }o--|| accounts : account_id
+    email_messages }o--|| accounts : account_id
+    email_messages }o--|| users : author_id
+    encrypted_configs }o--|| accounts : account_id
+    encrypted_user_configs }o--|| users : user_id
+    mcp_tokens }o--|| users : user_id
+    oauth_access_grants }o--|| oauth_applications : application_id
+    oauth_access_grants }o--|| users : resource_owner_id
+    oauth_access_tokens }o--|| oauth_applications : application_id
+    oauth_access_tokens }o--|| users : resource_owner_id
+    submission_events }o--|| accounts : account_id
+    submission_events }o--|| submissions : submission_id
+    submission_events }o--|| submitters : submitter_id
+    submissions }o--|| users : created_by_user_id
+    submissions }o--|| templates : template_id
+    submitter_versions }o--|| submitters : submitter_id
+    submitters }o--|| submissions : submission_id
+    template_accesses }o--|| templates : template_id
+    template_folders }o--|| accounts : account_id
+    template_folders }o--|| users : author_id
+    template_folders }o--|| template_folders : parent_folder_id
+    template_sharings }o--|| templates : template_id
+    template_versions }o--|| accounts : account_id
+    template_versions }o--|| users : author_id
+    template_versions }o--|| templates : template_id
+    templates }o--|| accounts : account_id
+    templates }o--|| users : author_id
+    templates }o--|| template_folders : folder_id
+    user_configs }o--|| users : user_id
+    users }o--|| accounts : account_id
+    webhook_urls }o--|| accounts : account_id
