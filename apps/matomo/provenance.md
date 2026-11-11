@@ -1,4 +1,4 @@
-# Provenance — Matomo
+# Provenance - Matomo
 
 Every claim in the entry reduces to this file: the exact commands that produced the capture. Run them, diff us.
 
@@ -32,5 +32,6 @@ Alternative reproduction path: install Matomo against MySQL and `mysqldump --no-
 - [x] SVG + thumbnail exported
 - [x] DBML exported from FigSchema
 - [x] dictionary.md exported from FigSchema
+- [x] mermaid exported from FigSchema
 - [x] DBML + dictionary verified against the DDL (issues: 0 on both)
 - [x] FigJam Community file published, link added to the entry

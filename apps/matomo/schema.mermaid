@@ -1,0 +1,281 @@
+%% Diagrammed with FigSchema
+erDiagram
+    matomo_access {
+        integer(10) idaccess PK
+        varchar(100) login FK
+        integer_unsigned idsite FK
+        varchar(50) access
+    }
+    matomo_annotations {
+        bigint_unsigned id PK
+        integer_unsigned idsite FK
+        datetime date
+        text note
+        tinyint(1) starred
+        varchar(100) user FK
+    }
+    matomo_archive_invalidations {
+        bigint_unsigned idinvalidation PK
+        integer_unsigned idarchive FK
+        varchar(255) name
+        integer_unsigned idsite FK
+        date date1
+        date date2
+        tinyint_unsigned period
+        datetime ts_invalidated
+        datetime ts_started
+        tinyint(1) status
+        varchar(255) report
+        varchar(100) processing_host
+        varchar(15) process_id
+    }
+    matomo_archiving_metrics {
+        bigint_unsigned metadataid PK
+        bigint_unsigned idarchive PK
+        integer_unsigned idsite FK
+        varchar(255) archive_name
+        date date1
+        date date2
+        tinyint_unsigned period
+        datetime ts_started
+        datetime ts_finished
+        bigint_unsigned total_time
+        bigint_unsigned total_time_exclusive
+        tinyint(1) is_temporary
+    }
+    matomo_brute_force_log {
+        bigint(11) id_brute_force_log PK
+        varchar(60) ip_address
+        datetime attempted_at
+        varchar(100) login FK
+    }
+    matomo_changes {
+        integer_unsigned idchange PK
+        varchar(60) plugin_name UK
+        varchar(20) version UK
+        varchar(255) title UK
+        text description
+        varchar(255) link_name
+        varchar(255) link
+        datetime created_time
+    }
+    matomo_goal {
+        int(11) idgoal PK
+        int(11) idsite FK
+        varchar(50) name
+        varchar(255) description
+        varchar(20) match_attribute
+        varchar(255) pattern
+        varchar(25) pattern_type
+        tinyint(4) case_sensitive
+        tinyint(4) allow_multiple
+        double revenue
+        tinyint(4) deleted
+        tinyint(4) event_value_as_revenue
+    }
+    matomo_locks {
+        varchar(70) key PK
+        varchar(255) value
+        bigint_unsigned expiry_time
+    }
+    matomo_log_action {
+        integer(10) idaction PK
+        varchar(4096) name
+        integer(10) hash
+        tinyint_unsigned type
+        tinyint(2) url_prefix
+    }
+    matomo_log_conversion {
+        bigint(10) idvisit FK
+        int(10) idsite UK
+        binary(8) idvisitor
+        datetime server_time
+        integer(10) idaction_url FK
+        bigint(10) idlink_va FK
+        int(10) idgoal FK
+        int_unsigned buster PK
+        varchar(100) idorder UK
+        smallint_unsigned items
+        varchar(4096) url
+        double revenue
+        double revenue_shipping
+        double revenue_subtotal
+        double revenue_tax
+        double revenue_discount
+        smallint_unsigned pageviews_before
+    }
+    matomo_log_conversion_item {
+        int(10) idsite FK
+        binary(8) idvisitor
+        datetime server_time
+        bigint(10) idvisit FK
+        varchar(100) idorder PK
+        integer(10) idaction_sku FK
+        integer(10) idaction_name
+        integer(10) idaction_category
+        integer(10) idaction_category2
+        integer(10) idaction_category3
+        integer(10) idaction_category4
+        integer(10) idaction_category5
+        double price
+        integer(10) quantity
+        tinyint(1) deleted
+    }
+    matomo_log_link_visit_action {
+        bigint(10) idlink_va PK
+        int(10) idsite FK
+        binary(8) idvisitor
+        bigint(10) idvisit FK
+        integer(10) idaction_url_ref FK
+        integer(10) idaction_name_ref FK
+        double custom_float
+        mediumint_unsigned pageview_position
+    }
+    matomo_log_profiling {
+        text query UK
+        integer_unsigned count
+        float sum_time_ms
+        bigint_unsigned idprofiling PK
+    }
+    matomo_log_visit {
+        bigint(10) idvisit PK
+        integer(10) idsite FK
+        binary(8) idvisitor
+        datetime visit_last_action_time
+        binary(8) config_id
+        varbinary(16) location_ip
+    }
+    matomo_logger_message {
+        integer_unsigned idlogger_message PK
+        varchar(50) tag
+        timestamp timestamp
+        varchar(16) level
+        text message
+    }
+    matomo_option {
+        varchar(191) option_name PK
+        longtext option_value
+        tinyint autoload
+    }
+    matomo_plugin_setting {
+        bigint_unsigned idplugin_setting PK
+        varchar(60) plugin_name
+        varchar(255) setting_name
+        longtext setting_value
+        tinyint_unsigned json_encoded
+        varchar(100) user_login FK
+    }
+    matomo_sequence {
+        varchar(120) name PK
+        bigint(20) value
+    }
+    matomo_session {
+        varchar(191) id PK
+        integer modified
+        integer lifetime
+        mediumtext data
+    }
+    matomo_site {
+        integer(10) idsite PK
+        varchar(90) name
+        varchar(255) description
+        varchar(255) main_url
+        timestamp ts_created
+        tinyint ecommerce
+        tinyint sitesearch
+        text sitesearch_keyword_parameters
+        text sitesearch_category_parameters
+        varchar(50) timezone
+        char(3) currency
+        tinyint(1) exclude_unknown_urls
+        text excluded_ips
+        text excluded_parameters
+        text excluded_user_agents
+        text excluded_referrers
+        varchar(250) group
+        varchar(255) type
+        tinyint keep_url_fragment
+        varchar(100) creator_login FK
+    }
+    matomo_site_setting {
+        bigint_unsigned idsite_setting PK
+        integer(10) idsite FK
+        varchar(60) plugin_name
+        varchar(255) setting_name
+        longtext setting_value
+        tinyint_unsigned json_encoded
+    }
+    matomo_site_url {
+        varchar(190) url PK
+        integer(10) idsite FK
+    }
+    matomo_tracking_failure {
+        smallint_unsigned idfailure PK
+        bigint(20) idsite FK
+        datetime date_first_occurred
+        mediumtext request_url
+    }
+    matomo_twofactor_recovery_code {
+        bigint_unsigned idrecoverycode PK
+        varchar(100) login FK
+        varchar(40) recovery_code
+    }
+    matomo_user {
+        varchar(100) login PK
+        varchar(255) password
+        varchar(100) email UK
+        varchar(40) twofactor_secret
+        tinyint(2) superuser_access
+        timestamp date_registered
+        timestamp ts_password_modified
+        integer_unsigned idchange_last_viewed
+        varchar(100) invited_by
+        varchar(191) invite_token
+        varchar(191) invite_link_token
+        timestamp invite_expired_at
+        timestamp invite_accept_at
+        timestamp ts_changes_shown
+        timestamp ts_last_seen
+        timestamp ts_inactivity_notified
+    }
+    matomo_user_token_auth {
+        bigint_unsigned idusertokenauth PK
+        varchar(100) login FK
+        varchar(100) description
+        varchar(191) password UK
+        varchar(30) hash_algo
+        tinyint(1) system_token
+        datetime last_used
+        datetime date_created
+        datetime date_expired
+        tinyint(2) secure_only
+        datetime ts_rotation_notified
+        datetime ts_expiration_warning_notified
+    }
+    matomo_goal ||--o{ matomo_log_conversion : idgoal
+    matomo_log_action ||--o{ matomo_log_link_visit_action : idaction
+    matomo_log_action ||--o{ matomo_log_conversion : idaction
+    matomo_log_action ||--o{ matomo_log_conversion_item : idaction
+    matomo_log_link_visit_action ||--o{ matomo_log_conversion : idlink_va
+    matomo_log_visit ||--o{ matomo_log_link_visit_action : idvisit
+    matomo_log_visit ||--o{ matomo_log_conversion : idvisit
+    matomo_log_visit ||--o{ matomo_log_conversion_item : idvisit
+    matomo_site ||--o{ matomo_site_url : idsite
+    matomo_site ||--o{ matomo_site_setting : idsite
+    matomo_site ||--o{ matomo_goal : idsite
+    matomo_site ||--o{ matomo_log_link_visit_action : idsite
+    matomo_site ||--o{ matomo_log_conversion : idsite
+    matomo_site ||--o{ matomo_log_conversion_item : idsite
+    matomo_site ||--o{ matomo_log_visit : idsite
+    matomo_site ||--o{ matomo_archiving_metrics : idsite
+    matomo_site ||--o{ matomo_tracking_failure : idsite
+    matomo_site ||--o{ matomo_annotations : idsite
+    matomo_site ||--o{ matomo_access : idsite
+    matomo_site ||--o{ matomo_archive_invalidations : idsite
+    matomo_user ||--o{ matomo_user_token_auth : login
+    matomo_user ||--o{ matomo_twofactor_recovery_code : login
+    matomo_user ||--o{ matomo_access : login
+    matomo_user ||--o{ matomo_brute_force_log : login
+    matomo_user ||--o{ matomo_site : login
+    matomo_user ||--o{ matomo_plugin_setting : login
+    matomo_user ||--o{ matomo_annotations : login
