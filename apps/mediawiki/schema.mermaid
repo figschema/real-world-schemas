@@ -1,0 +1,584 @@
+%% Diagrammed with FigSchema
+erDiagram
+    actor {
+        bigint(20) actor_id PK
+        int(10) actor_user UK
+        varbinary(255) actor_name UK
+    }
+    archive {
+        int(10) ar_id PK
+        int(10) ar_namespace
+        varbinary(255) ar_title
+        bigint(20) ar_comment_id FK
+        bigint(20) ar_actor FK
+        binary(14) ar_timestamp
+        tinyint(1) ar_minor_edit
+        int(10) ar_rev_id UK
+        tinyint(1) ar_deleted
+        int(10) ar_len
+        int(10) ar_page_id FK
+        int(10) ar_parent_id
+    }
+    block {
+        int(10) bl_id PK
+        int(10) bl_target FK
+        bigint(20) bl_by_actor FK
+        bigint(20) bl_reason_id
+        binary(14) bl_timestamp
+        tinyint(1) bl_anon_only
+        tinyint(1) bl_create_account
+        tinyint(1) bl_enable_autoblock
+        varbinary(14) bl_expiry
+        tinyint(1) bl_deleted
+        tinyint(1) bl_block_email
+        tinyint(1) bl_allow_usertalk
+        int(10) bl_parent_block_id
+        tinyint(1) bl_sitewide
+    }
+    block_target {
+        int(10) bt_id PK
+        tinyblob bt_address
+        int(10) bt_user FK
+        varbinary(255) bt_user_text
+        tinyint(1) bt_auto
+        tinyblob bt_range_start
+        tinyblob bt_range_end
+        tinyblob bt_ip_hex
+        int(10) bt_count
+    }
+    bot_passwords {
+        int(10) bp_user PK
+        varbinary(32) bp_app_id PK
+        tinyblob bp_password
+        binary(32) bp_token
+        blob bp_restrictions
+        blob bp_grants
+    }
+    category {
+        int(10) cat_id PK
+        varbinary(255) cat_title UK
+        int(10) cat_pages
+        int(10) cat_subcats
+        int(10) cat_files
+    }
+    categorylinks {
+        int(10) cl_from PK
+        bigint(20) cl_target_id PK
+        varbinary(230) cl_sortkey
+        varbinary(255) cl_sortkey_prefix
+        binary(14) cl_timestamp
+        enum(_page_,_subcat_,_file_) cl_type
+        smallint_unsigned cl_collation_id
+    }
+    change_tag {
+        int(10) ct_id PK
+        bigint(20) ct_rc_id UK
+        int(10) ct_log_id UK
+        int(10) ct_rev_id UK
+        blob ct_params
+        int(10) ct_tag_id UK
+    }
+    change_tag_def {
+        int(10) ctd_id PK
+        varbinary(255) ctd_name UK
+        tinyint(1) ctd_user_defined
+        bigint(20) ctd_count
+    }
+    collation {
+        smallint_unsigned collation_id PK
+        varbinary(64) collation_name UK
+    }
+    comment {
+        bigint(20) comment_id PK
+        int(10) comment_hash
+        blob comment_text
+        blob comment_data
+    }
+    content {
+        bigint(20) content_id PK
+        int(10) content_size
+        varbinary(32) content_sha1
+        smallint_unsigned content_model
+        varbinary(255) content_address
+    }
+    content_models {
+        int(10) model_id PK
+        varbinary(64) model_name UK
+    }
+    existencelinks {
+        int(10) exl_from PK
+        bigint(20) exl_target_id PK
+    }
+    externallinks {
+        int(10) el_id PK
+        int(10) el_from FK
+        varbinary(255) el_to_domain_index
+        blob el_to_path
+    }
+    file {
+        bigint(20) file_id PK
+        varbinary(255) file_name UK
+        bigint(20) file_latest FK
+        smallint_unsigned file_type
+        smallint_unsigned file_deleted
+    }
+    filearchive {
+        int(10) fa_id PK
+        varbinary(255) fa_name
+        varbinary(255) fa_archive_name
+        varbinary(16) fa_storage_group
+        varbinary(64) fa_storage_key
+        int(10) fa_deleted_user
+        binary(14) fa_deleted_timestamp
+        bigint(20) fa_deleted_reason_id
+        bigint(20) fa_size
+        int(10) fa_width
+        int(10) fa_height
+        mediumblob fa_metadata
+        int(10) fa_bits
+        enum(_UNKNOWN_,_BITMAP_,_DRAWING_,_AUDIO_,_VIDEO_,_MULTIMEDIA_,_OFFICE_,_TEXT_,_EXECUTABLE_,_ARCHIVE_,_3D_) fa_media_type
+        enum(_unknown_,_application_,_audio_,_image_,_text_,_video_,_message_,_model_,_multipart_,_chemical_) fa_major_mime
+        varbinary(100) fa_minor_mime
+        bigint(20) fa_description_id FK
+        bigint(20) fa_actor FK
+        binary(14) fa_timestamp
+        tinyint(1) fa_deleted
+        varbinary(32) fa_sha1
+    }
+    filerevision {
+        bigint(20) fr_id PK
+        bigint(20) fr_file FK
+        bigint(20) fr_size
+        int(10) fr_width
+        int(10) fr_height
+        mediumblob fr_metadata
+        int(10) fr_bits
+        bigint(20) fr_description_id FK
+        bigint(20) fr_actor FK
+        binary(14) fr_timestamp
+        varbinary(32) fr_sha1
+        varbinary(255) fr_archive_name
+        smallint_unsigned fr_deleted
+    }
+    filetypes {
+        smallint_unsigned ft_id PK
+        varbinary(255) ft_media_type UK
+        varbinary(255) ft_major_mime UK
+        varbinary(255) ft_minor_mime UK
+    }
+    image {
+        varbinary(255) img_name PK
+        bigint(20) img_size
+        int(10) img_width
+        int(10) img_height
+        mediumblob img_metadata
+        int(10) img_bits
+        enum(_UNKNOWN_,_BITMAP_,_DRAWING_,_AUDIO_,_VIDEO_,_MULTIMEDIA_,_OFFICE_,_TEXT_,_EXECUTABLE_,_ARCHIVE_,_3D_) img_media_type
+        enum(_unknown_,_application_,_audio_,_image_,_text_,_video_,_message_,_model_,_multipart_,_chemical_) img_major_mime
+        varbinary(100) img_minor_mime
+        bigint(20) img_description_id FK
+        bigint(20) img_actor FK
+        binary(14) img_timestamp
+        varbinary(32) img_sha1
+    }
+    imagelinks {
+        int(10) il_from PK
+        int(10) il_from_namespace
+        bigint(20) il_target_id PK
+    }
+    interwiki {
+        varchar(32) iw_prefix PK
+        blob iw_url
+        blob iw_api
+        varchar(64) iw_wikiid
+        tinyint(1) iw_local
+        tinyint(1) iw_trans
+    }
+    ip_changes {
+        int(10) ipc_rev_id PK
+        binary(14) ipc_rev_timestamp
+        varbinary(35) ipc_hex
+    }
+    ipblocks_restrictions {
+        int(10) ir_ipb_id PK
+        tinyint(4) ir_type PK
+        int(10) ir_value PK
+    }
+    iwlinks {
+        int(10) iwl_from PK
+        varbinary(32) iwl_prefix PK
+        varbinary(255) iwl_title PK
+    }
+    job {
+        int(10) job_id PK
+        varbinary(60) job_cmd
+        int(10) job_namespace
+        varbinary(255) job_title
+        binary(14) job_timestamp
+        mediumblob job_params
+        int(10) job_random
+        int(10) job_attempts
+        varbinary(32) job_token
+        binary(14) job_token_timestamp
+        varbinary(32) job_sha1
+    }
+    l10n_cache {
+        varbinary(35) lc_lang PK
+        varchar(255) lc_key PK
+        mediumblob lc_value
+    }
+    langlinks {
+        int(10) ll_from PK
+        varbinary(35) ll_lang PK
+        varbinary(255) ll_title
+    }
+    linktarget {
+        bigint(20) lt_id PK
+        int(10) lt_namespace UK
+        varbinary(255) lt_title UK
+    }
+    log_search {
+        varbinary(32) ls_field PK
+        varchar(255) ls_value PK
+        int(10) ls_log_id PK
+    }
+    logging {
+        int(10) log_id PK
+        varbinary(32) log_type
+        varbinary(32) log_action
+        binary(14) log_timestamp
+        bigint(20) log_actor FK
+        int(10) log_namespace
+        varbinary(255) log_title
+        int(10) log_page FK
+        bigint(20) log_comment_id FK
+        blob log_params
+        tinyint(1) log_deleted
+    }
+    objectcache {
+        varbinary(255) keyname PK
+        mediumblob value
+        binary(14) exptime
+    }
+    oldimage {
+        varbinary(255) oi_name FK
+        varbinary(255) oi_archive_name
+        bigint(20) oi_size
+        int(10) oi_width
+        int(10) oi_height
+        int(10) oi_bits
+        bigint(20) oi_description_id FK
+        bigint(20) oi_actor FK
+        binary(14) oi_timestamp
+        mediumblob oi_metadata
+        enum(_UNKNOWN_,_BITMAP_,_DRAWING_,_AUDIO_,_VIDEO_,_MULTIMEDIA_,_OFFICE_,_TEXT_,_EXECUTABLE_,_ARCHIVE_,_3D_) oi_media_type
+        enum(_unknown_,_application_,_audio_,_image_,_text_,_video_,_message_,_model_,_multipart_,_chemical_) oi_major_mime
+        varbinary(100) oi_minor_mime
+        tinyint(1) oi_deleted
+        varbinary(32) oi_sha1
+    }
+    page {
+        int(10) page_id PK
+        int(10) page_namespace UK
+        varbinary(255) page_title UK
+        tinyint(1) page_is_redirect
+        tinyint(1) page_is_new
+        float_unsigned page_random
+        binary(14) page_touched
+        binary(14) page_links_updated
+        int(10) page_latest FK
+        int(10) page_len
+        varbinary(32) page_content_model
+        varbinary(35) page_lang
+    }
+    page_props {
+        int(10) pp_page PK
+        varbinary(60) pp_propname PK
+        blob pp_value
+        float pp_sortkey UK
+    }
+    page_restrictions {
+        int(10) pr_id PK
+        int(10) pr_page UK
+        varbinary(60) pr_type UK
+        varbinary(60) pr_level
+        tinyint(1) pr_cascade
+        varbinary(14) pr_expiry
+    }
+    pagelinks {
+        int(10) pl_from PK
+        int(10) pl_from_namespace
+        bigint(20) pl_target_id PK
+    }
+    protected_titles {
+        int(10) pt_namespace PK
+        varbinary(255) pt_title PK
+        int(10) pt_user
+        bigint(20) pt_reason_id
+        binary(14) pt_timestamp
+        varbinary(14) pt_expiry
+        varbinary(60) pt_create_perm
+    }
+    querycache {
+        varbinary(32) qc_type
+        int(10) qc_value
+        int(10) qc_namespace
+        varbinary(255) qc_title
+    }
+    querycache_info {
+        varbinary(32) qci_type PK
+        binary(14) qci_timestamp
+    }
+    querycachetwo {
+        varbinary(32) qcc_type
+        int(10) qcc_value
+        int(10) qcc_namespace
+        varbinary(255) qcc_title
+        int(10) qcc_namespacetwo
+        varbinary(255) qcc_titletwo
+    }
+    recentchanges {
+        bigint(20) rc_id PK
+        binary(14) rc_timestamp
+        bigint(20) rc_actor FK
+        int(10) rc_namespace
+        varbinary(255) rc_title
+        bigint(20) rc_comment_id FK
+        tinyint(1) rc_minor
+        tinyint(1) rc_bot
+        int(10) rc_cur_id FK
+        int(10) rc_this_oldid FK
+        int(10) rc_last_oldid
+        varbinary(16) rc_source
+        tinyint(1) rc_patrolled
+        varbinary(40) rc_ip
+        int(10) rc_old_len
+        int(10) rc_new_len
+        tinyint(1) rc_deleted
+        int(10) rc_logid
+        varbinary(255) rc_log_type
+        varbinary(255) rc_log_action
+        blob rc_params
+    }
+    redirect {
+        int(10) rd_from PK
+        int(10) rd_namespace
+        varbinary(255) rd_title
+        varchar(32) rd_interwiki
+        varbinary(255) rd_fragment
+    }
+    revision {
+        bigint(20) rev_id PK
+        int(10) rev_page FK
+        bigint(20) rev_comment_id FK
+        bigint(20) rev_actor FK
+        binary(14) rev_timestamp
+        tinyint(1) rev_minor_edit
+        tinyint(1) rev_deleted
+        int(10) rev_len
+        bigint(20) rev_parent_id FK
+    }
+    searchindex {
+        int(10) si_page PK
+        text si_title
+        text si_text
+    }
+    site_identifiers {
+        varbinary(32) si_type PK
+        varbinary(32) si_key PK
+        int(10) si_site
+    }
+    site_stats {
+        int(10) ss_row_id PK
+        bigint(20) ss_total_edits
+        bigint(20) ss_good_articles
+        bigint(20) ss_total_pages
+        bigint(20) ss_users
+        bigint(20) ss_active_users
+        bigint(20) ss_images
+    }
+    sites {
+        int(10) site_id PK
+        varbinary(64) site_global_key UK
+        varbinary(32) site_type
+        varbinary(32) site_group
+        varbinary(32) site_source
+        varbinary(35) site_language
+        varbinary(32) site_protocol
+        varchar(255) site_domain
+        blob site_data
+        tinyint(1) site_forward
+        blob site_config
+    }
+    slot_roles {
+        int(10) role_id PK
+        varbinary(64) role_name UK
+    }
+    slots {
+        bigint(20) slot_revision_id PK
+        smallint_unsigned slot_role_id PK
+        bigint(20) slot_content_id
+        bigint(20) slot_origin
+    }
+    templatelinks {
+        int(10) tl_from PK
+        int(10) tl_from_namespace
+        bigint(20) tl_target_id PK
+    }
+    text {
+        int(10) old_id PK
+        mediumblob old_text
+        tinyblob old_flags
+    }
+    updatelog {
+        varchar(255) ul_key PK
+        blob ul_value
+    }
+    uploadstash {
+        int(10) us_id PK
+        int(10) us_user FK
+        varchar(255) us_key UK
+        varchar(255) us_orig_path
+        varchar(255) us_path
+        varchar(50) us_source_type
+        binary(14) us_timestamp
+        varchar(50) us_status
+        int(10) us_chunk_inx
+        blob us_props
+        bigint(20) us_size
+        varchar(31) us_sha1
+        varchar(255) us_mime
+        enum(_UNKNOWN_,_BITMAP_,_DRAWING_,_AUDIO_,_VIDEO_,_MULTIMEDIA_,_OFFICE_,_TEXT_,_EXECUTABLE_,_ARCHIVE_,_3D_) us_media_type
+        int(10) us_image_width
+        int(10) us_image_height
+        smallint_unsigned us_image_bits
+    }
+    user {
+        int(10) user_id PK
+        varbinary(255) user_name UK
+        varbinary(255) user_real_name
+        tinyblob user_password
+        tinyblob user_newpassword
+        binary(14) user_newpass_time
+        text user_email
+        binary(14) user_touched
+        binary(32) user_token
+        binary(14) user_email_authenticated
+        binary(32) user_email_token
+        binary(14) user_email_token_expires
+        binary(14) user_registration
+        int(10) user_editcount
+        varbinary(14) user_password_expires
+        tinyint(1) user_is_temp
+    }
+    user_autocreate_serial {
+        int(10) uas_shard PK
+        smallint_unsigned uas_year PK
+        int(10) uas_value
+    }
+    user_former_groups {
+        int(10) ufg_user PK
+        varbinary(255) ufg_group PK
+    }
+    user_groups {
+        int(10) ug_user PK
+        varbinary(255) ug_group PK
+        varbinary(14) ug_expiry
+    }
+    user_newtalk {
+        int(10) user_id FK
+        varbinary(40) user_ip
+        binary(14) user_last_timestamp
+    }
+    user_properties {
+        int(10) up_user PK
+        varbinary(255) up_property PK
+        blob up_value
+    }
+    watchlist {
+        int(10) wl_id PK
+        int(10) wl_user UK
+        int(10) wl_namespace UK
+        varbinary(255) wl_title UK
+        binary(14) wl_notificationtimestamp
+    }
+    watchlist_expiry {
+        int(10) we_item PK
+        binary(14) we_expiry
+    }
+    watchlist_label {
+        int(10) wll_id PK
+        int(10) wll_user UK
+        varbinary(255) wll_name UK
+    }
+    watchlist_label_member {
+        int(10) wlm_label PK
+        int(10) wlm_item PK
+    }
+    actor ||--o{ revision : actor_id
+    actor ||--o{ logging : actor_id
+    actor ||--o{ recentchanges : actor_id
+    actor ||--o{ image : actor_id
+    actor ||--o{ filearchive : actor_id
+    actor ||--o{ oldimage : actor_id
+    actor ||--o{ filerevision : actor_id
+    actor ||--o{ archive : actor_id
+    actor ||--o{ block : actor_id
+    block_target ||--o{ block : bt_id
+    block ||--o{ ipblocks_restrictions : bl_id
+    change_tag_def ||--o{ change_tag : ctd_id
+    comment ||--o{ revision : comment_id
+    comment ||--o{ recentchanges : comment_id
+    comment ||--o{ logging : comment_id
+    comment ||--o{ archive : comment_id
+    comment ||--o{ image : comment_id
+    comment ||--o{ oldimage : comment_id
+    comment ||--o{ filearchive : comment_id
+    comment ||--o{ filerevision : comment_id
+    file ||--o{ filerevision : file_id
+    filerevision ||--o{ file : fr_id
+    image ||--o{ oldimage : img_name
+    linktarget ||--o{ pagelinks : lt_id
+    linktarget ||--o{ templatelinks : lt_id
+    linktarget ||--o{ imagelinks : lt_id
+    linktarget ||--o{ categorylinks : lt_id
+    linktarget ||--o{ existencelinks : lt_id
+    logging ||--o{ change_tag : log_id
+    page ||--o{ revision : page_id
+    page ||--o{ archive : page_id
+    page ||--o{ redirect : page_id
+    page ||--o{ page_restrictions : page_id
+    page ||--o{ pagelinks : page_id
+    page ||--o{ templatelinks : page_id
+    page ||--o{ imagelinks : page_id
+    page ||--o{ categorylinks : page_id
+    page ||--o{ externallinks : page_id
+    page ||--o{ existencelinks : page_id
+    page ||--o{ langlinks : page_id
+    page ||--o{ iwlinks : page_id
+    page ||--o{ page_props : page_id
+    page ||--o{ recentchanges : page_id
+    page ||--o{ logging : page_id
+    page ||--o{ searchindex : page_id
+    recentchanges ||--o{ change_tag : rc_id
+    revision ||--o{ page : rev_id
+    revision ||--o{ slots : rev_id
+    revision ||--o{ ip_changes : rev_id
+    revision ||--o{ change_tag : rev_id
+    revision ||--o{ archive : rev_id
+    revision ||--o{ recentchanges : rev_id
+    revision ||--o{ revision : rev_id
+    text ||--o{ content : old_id
+    user ||--o{ actor : user_id
+    user ||--o{ user_groups : user_id
+    user ||--o{ user_former_groups : user_id
+    user ||--o{ user_properties : user_id
+    user ||--o{ user_newtalk : user_id
+    user ||--o{ bot_passwords : user_id
+    user ||--o{ block_target : user_id
+    user ||--o{ uploadstash : user_id
+    user ||--o{ watchlist : user_id
+    user ||--o{ watchlist_label : user_id
+    watchlist_label ||--o{ watchlist_label_member : wll_id
+    watchlist ||--o{ watchlist_expiry : wl_id
+    watchlist ||--o{ watchlist_label_member : wl_id

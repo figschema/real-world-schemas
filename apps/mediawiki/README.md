@@ -1,6 +1,6 @@
 # MediaWiki database schema
 
-> 🚧 **In progress** - captured, being arranged. This banner disappears when the diagram lands.
+>![MediaWiki database schema - ER diagram](schema.svg)
 
 The database behind Wikipedia and every other wiki farm running MediaWiki: 64 tables, zero foreign keys, revision content split across a cluster of purpose-built tables - and the namespace system that shapes everything.
 
@@ -35,7 +35,7 @@ The database behind Wikipedia and every other wiki farm running MediaWiki: 64 ta
 
 Explore this schema interactively in FigJam - pan, zoom, and duplicate it:
 
-**[MediaWiki Database Schema - ER Diagram · Real-World Schemas #4](https://www.figma.com/community/file/1699090003890981312)
+**[MediaWiki Database Schema - ER Diagram · Real-World Schemas #4](https://www.figma.com/community/file/1699090003890981312)**
 
 ---
 
